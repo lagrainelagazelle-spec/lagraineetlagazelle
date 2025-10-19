@@ -42,17 +42,11 @@ export default function MenuPage() {
       <main className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         {/* En-tête stylisée oriental */}
         <section className="text-center mb-12">
-          <div className="mx-auto inline-block relative">
-            <div className="absolute inset-0 -skew-x-6 rounded-full blur-md opacity-20 bg-gradient-to-r from-brand-secondary to-brand-primary" />
-            <h1 className="relative text-4xl sm:text-5xl font-extrabold text-brand-primary tracking-wider">
-              Menu
-            </h1>
-          </div>
           <p className="mt-4 max-w-2xl mx-auto text-brand-text/90">
-            Sélection raffinée inspirée des saveurs d’Orient, présentée avec élégance.
+            Sélection raffinée inspirée des saveurs d’Orient.
           </p>
           {/* Bandeau défilant de motifs (graines & gazelles) */}
-          <div className="mt-8 marquee-container py-4 border-y border-brand-secondary/40 bg-brand-background/60 rounded-md">
+          <div className="mt-8 marquee-container py-4 bg-brand-background/60 rounded-md">
             <div className="marquee-track">
               {decorativeImages.map((src, idx) => (
                 <div key={`seq1-${idx}`} className="ground-badge">
