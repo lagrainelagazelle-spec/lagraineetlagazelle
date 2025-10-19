@@ -4,7 +4,7 @@ export default function SocialLinks() {
   return (
     <div className="flex items-center gap-2">
       <a
-        href="https://www.facebook.com"
+        href="https://www.facebook.com/people/La-Graine-Et-La-Gazelle/61582466075044/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Facebook"
@@ -15,7 +15,7 @@ export default function SocialLinks() {
         </svg>
       </a>
       <a
-        href="https://www.instagram.com"
+        href="https://www.instagram.com/lagraineetlagazelle/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Instagram"
