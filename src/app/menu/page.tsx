@@ -20,7 +20,18 @@ export default function MenuPage() {
             </div>
           </Link>
           <nav className="flex items-center gap-3 sm:gap-4">
-            <Link href="/" className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary border-[#1AA39A] text-brand-primary text-[#1AA39A] bg-transparent hover:bg-brand-primary hover:bg-[#1AA39A] hover:text-white transition focus:outline-none focus:ring-2 focus:ring-brand-secondary">Accueil</Link>
+            <div className="relative group">
+              <Link href="/menu" className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary border-[#1AA39A] text-brand-primary text-[#1AA39A] bg-transparent hover:bg-brand-primary hover:bg-[#1AA39A] hover:text-white transition focus:outline-none focus:ring-2 focus:ring-brand-secondary">Menu</Link>
+              <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150 absolute left-0 mt-2 w-56 rounded-md border border-gray-200 bg-white shadow-lg z-50">
+                <div className="py-2">
+                  <div className="px-3 py-1.5 text-xs font-semibold text-gray-500 uppercase tracking-wide">La Graine</div>
+                  <Link href="/menu#la-graine" className="block px-3 py-2 text-sm hover:bg-gray-50">Couscous</Link>
+                  <Link href="/menu#les-tajines" className="block px-3 py-2 text-sm hover:bg-gray-50">Tajines</Link>
+                  <div className="mt-2 border-t" />
+                  <Link href="/menu#la-gazelle" className="block px-3 py-2 text-sm font-semibold hover:bg-gray-50">La Gazelle</Link>
+                </div>
+              </div>
+            </div>
             <Link href="/commande" className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary bg-[#1AA39A] text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]">Commander</Link>
           </nav>
         </div>
@@ -39,26 +50,15 @@ export default function MenuPage() {
         </div>
       </section>
 
-      {/* Sous-menu d'ancrage vers les sections du menu */}
-      <nav className="bg-white border-y border-brand-secondary/40">
-        <div className="max-w-5xl mx-auto px-4 py-2 flex items-center justify-center gap-3 sm:gap-4">
-          <a href="#la-graine" className="text-sm font-bold px-3 py-1.5 rounded-md border-2 border-[#1AA39A] text-[#1AA39A] hover:bg-[#1AA39A] hover:text-white transition">
-            La Graine
-          </a>
-          <a href="#la-gazelle" className="text-sm font-bold px-3 py-1.5 rounded-md border-2 border-[#1AA39A] text-[#1AA39A] hover:bg-[#1AA39A] hover:text-white transition">
-            La Gazelle
-          </a>
-        </div>
-      </nav>
+      
 
       <main className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         {/* En-tête stylisée oriental */}
         <section className="text-center mb-12">
-          <p className="mt-4 max-w-2xl mx-auto text-brand-text/90">
-            Sélection raffinée inspirée des saveurs d’Orient.
-          </p>
+          {/* Titre déplacé au-dessus du carrousel */}
+          <h2 className="text-2xl font-extrabold tracking-widest text-brand-primary">LA GRAINE</h2>
           {/* Bandeau défilant de motifs (graines & gazelles) */}
-          <div className="mt-8 marquee-container py-4 bg-brand-background/60 rounded-md">
+          <div className="mt-6 marquee-container py-4 bg-brand-background/60 rounded-md">
             <div className="marquee-track">
               {decorativeImages.map((src, idx) => (
                 <div key={`seq1-${idx}`} className="ground-badge">
@@ -85,11 +85,15 @@ export default function MenuPage() {
               ))}
             </div>
           </div>
+          {/* Intro déplacée sous le carrousel */}
+          <p className="mt-4 max-w-2xl mx-auto text-brand-text/90">
+            Sélection raffinée inspirée des saveurs d’Orient.
+          </p>
         </section>
 
         {/* Récapitulatif détaillé (issu de l'affiche) */}
         <section id="la-graine" className="mb-12 scroll-mt-24">
-          <h2 className="text-center text-2xl font-extrabold tracking-widest text-brand-primary mb-6">LA GRAINE</h2>
+          <h2 className="text-center text-2xl font-extrabold tracking-widest text-brand-primary mb-6">LES COUSCOUS</h2>
           <div className="space-y-5">
             <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div className="flex-1 min-w-0">
@@ -136,8 +140,8 @@ export default function MenuPage() {
           </div>
 
           {/* Tajines */}
-          <div className="mt-8 space-y-5">
-            <h3 className="text-center text-xl font-extrabold tracking-widest text-brand-primary mb-2">TAJINES</h3>
+          <div id="les-tajines" className="mt-8 space-y-5 scroll-mt-24">
+            <h3 className="text-center text-xl font-extrabold tracking-widest text-brand-primary mb-2">LES TAJINES</h3>
             <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div className="flex-1 min-w-0">
                 <p className="font-extrabold tracking-wide">TAJINE POULET ABRICOT</p>
