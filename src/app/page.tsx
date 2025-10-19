@@ -3,11 +3,22 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <div className="bg-brand-background text-brand-text min-h-screen">
-      <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+      <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-12 w-auto" />
-          <nav>
-            <Link href="/commande" className="text-sm font-medium hover:text-brand-primary">
+          <div className="p-1 rounded-full logo-ring">
+            <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-12 w-12 object-cover rounded-full" />
+          </div>
+          <nav className="flex items-center gap-3 sm:gap-4">
+            <Link
+              href="/menu"
+              className="text-sm font-semibold px-3 py-2 sm:px-4 rounded-md bg-white border-2 border-brand-primary text-brand-primary shadow hover:bg-brand-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition"
+            >
+              Menu
+            </Link>
+            <Link
+              href="/commande"
+              className="text-sm font-semibold px-3 py-2 sm:px-4 rounded-md bg-brand-primary text-white hover:bg-brand-primary/90 shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary"
+            >
               Commander
             </Link>
           </nav>
@@ -41,7 +52,7 @@ export default function Home() {
       </main>
 
       <footer className="bg-white">
-        <div className="max-w-5xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+        <div className="max-w-5xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-brand-text/60">
           <p>&copy; {new Date().getFullYear()} La Graine et La Gazelle. Tous droits réservés.</p>
         </div>
       </footer>

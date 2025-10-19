@@ -9,10 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'brand-primary': '#4B5320', // Un vert olive foncé inspiré par la nature
-        'brand-secondary': '#D4AF37', // Un doré/moutarde pour les accents
-        'brand-background': '#F5F5DC', // Un beige très clair pour le fond
-        'brand-text': '#36454F', // Un gris charbon pour le texte
+        'brand-primary': '#1AA39A', // Turquoise proche du logo (accents & boutons)
+        'brand-secondary': '#F4C89D', // Abricot/doré doux pour les détails
+        'brand-background': '#FFFAF3', // Beige très clair et chaud en fond
+        'brand-text': '#1F2937', // Texte principal très lisible (slate-800)
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

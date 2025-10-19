@@ -49,13 +49,18 @@ export default function CommandePage() {
 
   return (
     <div className="bg-brand-background text-brand-text min-h-screen">
-      <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+      <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <a href="/" className="flex items-center">
-            <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-12 w-auto" />
+            <div className="p-1 rounded-full logo-ring">
+              <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-12 w-12 object-cover rounded-full" />
+            </div>
           </a>
-          <nav>
-            <a href="/" className="text-sm font-medium hover:text-brand-primary">
+          <nav className="flex items-center gap-3 sm:gap-4">
+            <a href="/menu" className="text-sm font-semibold px-3 py-2 sm:px-4 rounded-md bg-white border-2 border-brand-primary text-brand-primary shadow hover:bg-brand-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition">
+              Menu
+            </a>
+            <a href="/" className="text-sm font-semibold px-3 py-2 sm:px-4 rounded-md bg-brand-primary text-white hover:bg-brand-primary/90 shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary">
               Accueil
             </a>
           </nav>
@@ -65,11 +70,11 @@ export default function CommandePage() {
       <main className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="bg-white p-8 rounded-lg shadow-xl">
           <h1 className="text-3xl font-extrabold text-brand-primary mb-2">Passez votre précommande</h1>
-          <p className="text-gray-600 mb-8">Remplissez les informations ci-dessous pour valider votre commande.</p>
+          <p className="text-brand-text/80 mb-8">Remplissez les informations ci-dessous pour valider votre commande.</p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="full-name" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="full-name" className="block text-sm font-medium text-brand-text">
                 Nom complet
               </label>
               <div className="mt-1">
@@ -87,7 +92,7 @@ export default function CommandePage() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-medium text-brand-text">
                 Adresse email
               </label>
               <div className="mt-1">
@@ -105,7 +110,7 @@ export default function CommandePage() {
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="phone" className="block text-sm font-medium text-brand-text">
                 Numéro de téléphone
               </label>
               <div className="mt-1">
@@ -124,7 +129,7 @@ export default function CommandePage() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="product" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="product" className="block text-sm font-medium text-brand-text">
                   Choix du produit
                 </label>
                 <div className="mt-1">
@@ -144,7 +149,7 @@ export default function CommandePage() {
                 </div>
               </div>
                <div>
-                <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="quantity" className="block text-sm font-medium text-brand-text">
                   Quantité
                 </label>
                 <div className="mt-1">
@@ -163,7 +168,7 @@ export default function CommandePage() {
             </div>
 
             <div>
-              <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="address" className="block text-sm font-medium text-brand-text">
                 Adresse de livraison
               </label>
               <div className="mt-1">
@@ -180,7 +185,7 @@ export default function CommandePage() {
             </div>
 
             <div>
-              <label htmlFor="comments" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="comments" className="block text-sm font-medium text-brand-text">
                 Commentaires (optionnel)
               </label>
               <div className="mt-1">
@@ -206,8 +211,8 @@ export default function CommandePage() {
           </form>
         </div>
       </main>
-       <footer className="bg-white">
-        <div className="max-w-5xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+      <footer className="bg-white">
+        <div className="max-w-5xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-brand-text/60">
           <p>&copy; {new Date().getFullYear()} La Graine et La Gazelle. Tous droits réservés.</p>
         </div>
       </footer>
