@@ -26,6 +26,17 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Bandeau d'incitation commande/livraison */}
+      <section className="bg-brand-secondary/20 border-y border-brand-secondary/40">
+        <div className="max-w-5xl mx-auto px-4 py-3 text-center text-sm sm:text-base">
+          <span className="font-semibold text-brand-text">Commande & livraison</span>
+          <span className="mx-2">·</span>
+          À partir de 4 couscous. Prévoir jusqu’à 48h selon disponibilité.
+          <span className="mx-2">·</span>
+          <a href="tel:0692154474" className="font-bold text-brand-primary underline-offset-2 hover:underline">0692 15 44 74</a>
+        </div>
+      </section>
+
       <main className="text-center py-20 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <Image

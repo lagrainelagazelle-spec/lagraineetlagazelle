@@ -16,35 +16,50 @@ export async function POST(req: NextRequest) {
   try {
     const stripe = getStripe();
     const body = await req.json();
-    const { product, quantity, fullName, email, phone, address, comments } = body;
+    const { items, product, quantity, fullName, email, phone, address, comments } = body;
 
     
     // TODO: Récupérer le prix depuis une base de données ou une configuration
     // Pour l'instant, nous utilisons des valeurs fixes
-    const productDetails = {
-      'produit_a': { name: 'Produit A - Description', price: 1500 }, // 15.00 €
-      'produit_b': { name: 'Produit B - Description', price: 2500 }, // 25.00 €
-      'produit_c': { name: 'Produit C - Description', price: 3500 }, // 35.00 €
+    const productDetails: Record<string, { name: string; price: number }> = {
+      // La Graine
+      'couscous_royal': { name: 'Couscous Royal', price: 2000 },
+      'couscous_merguez': { name: 'Couscous Merguez', price: 1650 },
+      'couscous_poulet': { name: 'Couscous Poulet', price: 1650 },
+      'couscous_boulettes': { name: 'Couscous Boulettes', price: 1750 },
+      'couscous_2_viandes': { name: 'Couscous 2 Viandes', price: 1850 },
+      'couscous_vegetarien': { name: 'Couscous Végétarien', price: 1400 },
+      // La Gazelle (prix à la pièce / au coffret)
+      'corne_gazelle_piece': { name: 'Corne de gazelle (pièce)', price: 250 },
+      'macrouts_piece': { name: 'Macrouts (pièce)', price: 220 },
+      'montecaos_cannelle_piece': { name: 'Montecaos cannelle (pièce)', price: 200 },
+      'caprilu_citron_piece': { name: 'Caprilu au citron (pièce)', price: 300 },
+      'coffret_mix_6': { name: 'Coffret mix 6 pièces', price: 1250 },
+      'coffret_mix_12': { name: 'Coffret mix 12 pièces', price: 2490 },
+      'coffret_mix_18': { name: 'Coffret mix 18 pièces', price: 3790 },
     };
 
-    if (!productDetails[product as keyof typeof productDetails]) {
-      return NextResponse.json({ error: 'Produit non valide' }, { status: 400 });
+    // Construire la liste des articles
+    const requestedItems = Array.isArray(items) && items.length > 0
+      ? items
+      : [{ product, quantity }];
+
+    for (const it of requestedItems) {
+      if (!productDetails[it.product]) {
+        return NextResponse.json({ error: `Produit non valide: ${it.product}` }, { status: 400 });
+      }
     }
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: [
-        {
-          price_data: {
-            currency: 'eur',
-            product_data: {
-              name: productDetails[product as keyof typeof productDetails].name,
-            },
-            unit_amount: productDetails[product as keyof typeof productDetails].price,
-          },
-          quantity: Number(quantity),
+      line_items: requestedItems.map((it: { product: string; quantity: number }) => ({
+        price_data: {
+          currency: 'eur',
+          product_data: { name: productDetails[it.product].name },
+          unit_amount: productDetails[it.product].price,
         },
-      ],
+        quantity: Number(it.quantity || 1),
+      })),
       mode: 'payment',
       success_url: `${req.nextUrl.origin}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.nextUrl.origin}/commande`,
@@ -56,8 +71,7 @@ export async function POST(req: NextRequest) {
         phone,
         address,
         comments,
-        product,
-        quantity,
+        items: JSON.stringify(requestedItems),
       },
     });
 

@@ -4,12 +4,12 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 export default function CommandePage() {
+  type OrderItem = { product: string; quantity: number };
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
-    product: '',
-    quantity: 1,
+    items: [{ product: '', quantity: 4 }] as OrderItem[],
     address: '',
     comments: '',
   });
@@ -22,10 +22,39 @@ export default function CommandePage() {
     }));
   };
 
+  const handleItemChange = (index: number, field: keyof OrderItem, value: string) => {
+    setFormData((prev) => {
+      const updated = [...prev.items];
+      if (field === 'quantity') {
+        updated[index] = { ...updated[index], quantity: Number(value) };
+      } else {
+        updated[index] = { ...updated[index], product: value };
+      }
+      return { ...prev, items: updated };
+    });
+  };
+
+  const addItemRow = () => {
+    setFormData((prev) => ({ ...prev, items: [...prev.items, { product: '', quantity: 1 }] }));
+  };
+
+  const removeItemRow = (index: number) => {
+    setFormData((prev) => ({ ...prev, items: prev.items.filter((_, i) => i !== index) }));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     try {
+      // Validation: au moins 4 couscous (clés qui commencent par "couscous_")
+      const couscousCount = formData.items
+        .filter((it) => it.product.startsWith('couscous_'))
+        .reduce((sum, it) => sum + (Number(it.quantity) || 0), 0);
+      if (couscousCount < 4) {
+        alert('Minimum 4 couscous pour valider la commande.');
+        return;
+      }
+
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
@@ -67,6 +96,17 @@ export default function CommandePage() {
           </nav>
         </div>
       </header>
+
+      {/* Bandeau d'incitation commande/livraison */}
+      <section className="bg-brand-secondary/20 border-y border-brand-secondary/40">
+        <div className="max-w-5xl mx-auto px-4 py-3 text-center text-sm sm:text-base">
+          <span className="font-semibold text-brand-text">Commande & livraison</span>
+          <span className="mx-2">·</span>
+          À partir de 4 couscous. Prévoir jusqu’à 48h selon disponibilité.
+          <span className="mx-2">·</span>
+          <a href="tel:0692154474" className="font-bold text-brand-primary underline-offset-2 hover:underline">0692 15 44 74</a>
+        </div>
+      </section>
 
       <main className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="bg-white p-8 rounded-lg shadow-xl">
@@ -128,47 +168,71 @@ export default function CommandePage() {
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Lignes d'articles */}
+            <div className="space-y-4">
+              <label className="block text-sm font-medium text-brand-text">Articles</label>
+              {formData.items.map((item, index) => (
+                <div key={index} className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                  <div className="md:col-span-8">
+                    <label className="text-xs text-brand-text/70">Produit</label>
+                    <select
+                      value={item.product}
+                      onChange={(e) => handleItemChange(index, 'product', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-secondary focus:border-brand-secondary sm:text-sm"
+                      required
+                    >
+                      <option value="">Sélectionnez un produit</option>
+                      <optgroup label="La Graine - Couscous">
+                        <option value="couscous_royal">Couscous Royal — 20,00 €</option>
+                        <option value="couscous_merguez">Couscous Merguez — 16,50 €</option>
+                        <option value="couscous_poulet">Couscous Poulet — 16,50 €</option>
+                        <option value="couscous_boulettes">Couscous Boulettes — 17,50 €</option>
+                        <option value="couscous_2_viandes">Couscous 2 Viandes — 18,50 €</option>
+                        <option value="couscous_vegetarien">Couscous Végétarien — 14,00 €</option>
+                      </optgroup>
+                      <optgroup label="La Gazelle - Pâtisseries">
+                        <option value="corne_gazelle_piece">Corne de gazelle — 2,50 € / pièce</option>
+                        <option value="macrouts_piece">Macrouts — 2,20 € / pièce</option>
+                        <option value="montecaos_cannelle_piece">Montecaos cannelle — 2,00 € / pièce</option>
+                        <option value="caprilu_citron_piece">Caprilu au citron — 3,00 € / pièce</option>
+                        <option value="coffret_mix_6">Coffret mix 6 pièces — 12,50 €</option>
+                        <option value="coffret_mix_12">Coffret mix 12 pièces — 24,90 €</option>
+                        <option value="coffret_mix_18">Coffret mix 18 pièces — 37,90 €</option>
+                      </optgroup>
+                    </select>
+                  </div>
+                  <div className="md:col-span-3">
+                    <label className="text-xs text-brand-text/70">Quantité</label>
+                    <input
+                      type="number"
+                      min={1}
+                      value={item.quantity}
+                      onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-secondary focus:border-brand-secondary sm:text-sm"
+                      required
+                    />
+                  </div>
+                  <div className="md:col-span-1">
+                    <button
+                      type="button"
+                      onClick={() => removeItemRow(index)}
+                      className="w-full px-3 py-2 rounded-md border text-sm text-brand-text hover:bg-gray-50"
+                      aria-label="Supprimer l'article"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              ))}
               <div>
-                <label htmlFor="product" className="block text-sm font-medium text-brand-text">
-                  Choix du produit
-                </label>
-                <div className="mt-1">
-                  <select
-                    id="product"
-                    name="product"
-                    required
-                    value={formData.product}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-secondary focus:border-brand-secondary sm:text-sm"
-                  >
-                    <option value="">Sélectionnez un produit</option>
-                    <option value="couscous_royal">Couscous Royal — 20,00 €</option>
-                    <option value="couscous_merguez">Couscous Merguez — 16,50 €</option>
-                    <option value="couscous_poulet">Couscous Poulet — 16,50 €</option>
-                    <option value="couscous_boulettes">Couscous Boulettes — 17,50 €</option>
-                    <option value="couscous_2_viandes">Couscous 2 Viandes — 18,50 €</option>
-                  </select>
-                  <p className="mt-2 text-xs text-brand-text/70">Pour &quot;2 viandes&quot;, précisez vos choix (poulet, merguez, boulettes) dans les commentaires.</p>
-                </div>
-              </div>
-               <div>
-                <label htmlFor="quantity" className="block text-sm font-medium text-brand-text">
-                  Quantité
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="number"
-                    name="quantity"
-                    id="quantity"
-                    min="4"
-                    required
-                    value={formData.quantity}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-secondary focus:border-brand-secondary sm:text-sm"
-                  />
-                  <p className="mt-2 text-xs text-brand-text/70">Minimum 4 couscous par commande.</p>
-                </div>
+                <button
+                  type="button"
+                  onClick={addItemRow}
+                  className="px-4 py-2 rounded-md border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white text-sm font-semibold"
+                >
+                  + Ajouter un article
+                </button>
+                <p className="mt-2 text-xs text-brand-text/70">Minimum 4 couscous au total pour la commande.</p>
               </div>
             </div>
 

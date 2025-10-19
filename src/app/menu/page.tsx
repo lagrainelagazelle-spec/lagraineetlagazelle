@@ -17,6 +17,17 @@ export default function MenuPage() {
         </div>
       </header>
 
+      {/* Bandeau d'incitation commande/livraison */}
+      <section className="bg-brand-secondary/20 border-y border-brand-secondary/40">
+        <div className="max-w-5xl mx-auto px-4 py-3 text-center text-sm sm:text-base">
+          <span className="font-semibold text-brand-text">Commande & livraison</span>
+          <span className="mx-2">·</span>
+          À partir de 4 plats. Prévoir jusqu’à 48h selon disponibilité.
+          <span className="mx-2">·</span>
+          <a href="tel:0692154474" className="font-bold text-brand-primary underline-offset-2 hover:underline">0692 15 44 74</a>
+        </div>
+      </section>
+
       <main className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         {/* En-tête stylisée oriental */}
         <section className="text-center mb-12">
@@ -79,16 +90,90 @@ export default function MenuPage() {
             </div>
           </div>
 
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Tajines */}
+          <div className="mt-8 space-y-5">
+            <h3 className="text-center text-xl font-extrabold tracking-widest text-brand-primary mb-2">TAJINES</h3>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">TAJINE POULET ABRICOT</p>
+                <p className="text-sm text-brand-text/70">Base végétarienne + poulet + abricots confits et oignons confits</p>
+              </div>
+              <span className="font-bold text-brand-primary">19,50 €</span>
+            </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">TAJINE POULET AMANDES</p>
+                <p className="text-sm text-brand-text/70">Base végétarienne + amandes et olives</p>
+              </div>
+              <span className="font-bold text-brand-primary">19,50 €</span>
+            </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">TAJINE KEFTA PRUNEAUX</p>
+                <p className="text-sm text-brand-text/70">Base végétarienne + kefta + pruneaux et raisins confits</p>
+              </div>
+              <span className="font-bold text-brand-primary">18,50 €</span>
+            </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">TAJINE VÉGÉTARIEN</p>
+                <p className="text-sm text-brand-text/70">Légumes de saison, pommes de terre, petits pois, piment doux</p>
+              </div>
+              <span className="font-bold text-brand-primary">17,50 €</span>
+            </div>
+          </div>
+
+          <div className="mt-6">
             <div className="rounded-md border border-amber-200 bg-amber-50 p-4 text-sm">
               <p className="font-semibold text-brand-text">Allergènes</p>
               <p className="mt-1 text-brand-text/80">Gluten, céleri, graines de sésame, fruits à coque.</p>
             </div>
-            <div className="rounded-md border border-brand-primary/30 bg-white p-4 text-sm">
-              <p className="font-semibold text-brand-text">Commande & livraison</p>
-              <p className="mt-1 text-brand-text/80">À partir de 4 couscous. Prévoir jusqu’à 48h selon disponibilité.</p>
-              <p className="mt-1 text-brand-primary font-bold">Contact: 0692 15 44 74</p>
+          </div>
+        </section>
+
+        {/* Section pâtisseries - La Gazelle */}
+        <section className="mb-12">
+          <h2 className="text-center text-2xl font-extrabold tracking-widest text-brand-primary mb-6">LA GAZELLE</h2>
+          <div className="space-y-5">
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">CORNE DE GAZELLE</p>
+                <p className="text-sm text-brand-text/70">6 pièces: 12,50 € — 12 pièces: 23,90 €</p>
+              </div>
+              <span className="font-bold text-brand-primary">2,50 € / pièce</span>
             </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">MACROUTS</p>
+                <p className="text-sm text-brand-text/70">6 pièces: 11 € — 12 pièces: 19,90 €</p>
+              </div>
+              <span className="font-bold text-brand-primary">2,20 € / pièce</span>
+            </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">MONTECAOS CANNELLE</p>
+                <p className="text-sm text-brand-text/70">6 pièces: 10,50 € — 12 pièces: 19,90 €</p>
+              </div>
+              <span className="font-bold text-brand-primary">2,00 € / pièce</span>
+            </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">CAPRILU AU CITRON</p>
+                <p className="text-sm text-brand-text/70">6 pièces: 15,00 € — 12 pièces: 30,50 €</p>
+              </div>
+              <span className="font-bold text-brand-primary">3,00 € / pièce</span>
+            </div>
+          </div>
+
+          <div className="mt-6 rounded-md border border-amber-200 bg-amber-50 p-4 text-sm">
+            <p className="font-semibold text-brand-text">Coffrets</p>
+            <ul className="mt-1 text-brand-text/80 list-disc list-inside">
+              <li>Mix 6 pièces: 12,50 €</li>
+              <li>Mix 12 pièces: 24,90 €</li>
+              <li>Mix 18 pièces: 37,90 €</li>
+              <li>Quantité supérieure sur demande</li>
+            </ul>
+            <p className="mt-2 text-xs text-brand-text/60">Allergènes: gluten, fruits à coque et lait.</p>
           </div>
         </section>
 
