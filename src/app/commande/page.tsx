@@ -48,8 +48,8 @@ export default function CommandePage() {
   };
 
   return (
-    <div className="bg-brand-background text-brand-text min-h-screen">
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+    <div className="bg-white text-brand-text min-h-screen">
+      <header className="bg-white text-brand-text shadow-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <a href="/" className="flex items-center">
             <div className="p-1 rounded-full logo-ring">
@@ -57,10 +57,10 @@ export default function CommandePage() {
             </div>
           </a>
           <nav className="flex items-center gap-3 sm:gap-4">
-            <a href="/menu" className="text-sm font-semibold px-3 py-2 sm:px-4 rounded-md bg-white border-2 border-brand-primary text-brand-primary shadow hover:bg-brand-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition">
+            <a href="/menu" className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition">
               Menu
             </a>
-            <a href="/" className="text-sm font-semibold px-3 py-2 sm:px-4 rounded-md bg-brand-primary text-white hover:bg-brand-primary/90 shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary">
+            <a href="/" className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary">
               Accueil
             </a>
           </nav>

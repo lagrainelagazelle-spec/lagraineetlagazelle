@@ -37,3 +37,9 @@ body {
   box-shadow: 0 0 0 2px rgba(31,41,55,0.08), 0 0 0 6px rgba(244,200,157,0.35);
   background-color: #fff;
 }
+
+/* Placeholders plus lisibles */
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280; /* gray-500 */
+}

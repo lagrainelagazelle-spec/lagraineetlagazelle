@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="bg-brand-background text-brand-text min-h-screen">
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+    <div className="bg-white text-brand-text min-h-screen">
+      <header className="bg-white text-brand-text shadow-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="p-1 rounded-full logo-ring">
             <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-12 w-12 object-cover rounded-full" />
@@ -11,13 +11,13 @@ export default function Home() {
           <nav className="flex items-center gap-3 sm:gap-4">
             <Link
               href="/menu"
-              className="text-sm font-semibold px-3 py-2 sm:px-4 rounded-md bg-white border-2 border-brand-primary text-brand-primary shadow hover:bg-brand-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition"
+              className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition"
             >
               Menu
             </Link>
             <Link
               href="/commande"
-              className="text-sm font-semibold px-3 py-2 sm:px-4 rounded-md bg-brand-primary text-white hover:bg-brand-primary/90 shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary"
+              className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition"
             >
               Commander
             </Link>
@@ -43,7 +43,7 @@ export default function Home() {
           <div className="rounded-md shadow">
             <Link
               href="/commande"
-              className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-primary hover:bg-opacity-90 md:py-4 md:text-lg md:px-10"
+              className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition"
             >
               Commencer ma précommande
             </Link>
