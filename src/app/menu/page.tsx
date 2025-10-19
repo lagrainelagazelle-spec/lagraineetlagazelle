@@ -1,6 +1,15 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function MenuPage() {
+  const decorativeImages = [
+    '/images/graine.png',
+    '/images/graine_1.png',
+    '/images/graine_2.png',
+    '/images/gazelle.png',
+    '/images/gazelle_1.png',
+    '/images/gazelle_corne.png',
+  ];
   return (
     <div className="bg-white text-brand-text min-h-screen">
       <header className="bg-white text-brand-text shadow-sm sticky top-0 z-50">
@@ -42,6 +51,34 @@ export default function MenuPage() {
           <p className="mt-4 max-w-2xl mx-auto text-brand-text/90">
             Sélection raffinée inspirée des saveurs d’Orient, présentée avec élégance.
           </p>
+          {/* Bandeau défilant de motifs (graines & gazelles) */}
+          <div className="mt-8 marquee-container py-4 border-y border-brand-secondary/40 bg-brand-background/60 rounded-md">
+            <div className="marquee-track">
+              {decorativeImages.map((src, idx) => (
+                <div key={`seq1-${idx}`} className="ground-badge">
+                  <Image
+                    src={src}
+                    alt="Décor oriental"
+                    width={220}
+                    height={220}
+                    className="decorative-image h-20 sm:h-24 md:h-28 w-auto select-none pointer-events-none"
+                  />
+                </div>
+              ))}
+              {/* Séquence dupliquée pour boucle fluide */}
+              {decorativeImages.map((src, idx) => (
+                <div key={`seq2-${idx}`} className="ground-badge" aria-hidden="true">
+                  <Image
+                    src={src}
+                    alt=""
+                    width={220}
+                    height={220}
+                    className="decorative-image h-20 sm:h-24 md:h-28 w-auto select-none pointer-events-none"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* Récapitulatif détaillé (issu de l'affiche) */}

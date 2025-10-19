@@ -43,3 +43,47 @@ input::placeholder,
 textarea::placeholder {
   color: #6b7280; /* gray-500 */
 }
+
+/* --- Bandeau défilant (marquee) --- */
+.marquee-container {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0, black 10%, black 90%, transparent 100%);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 2.5rem; /* ~gap-10 */
+  width: max-content;
+  animation: marquee-left 28s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Doux contour/ombre pour images décoratives */
+.decorative-image {
+  filter: drop-shadow(0 2px 10px rgba(0,0,0,0.12)) drop-shadow(0 6px 20px rgba(26,163,154,0.15));
+}
+
+/* Pastille subtile autour, imitant un relief au sol */
+.ground-badge {
+  position: relative;
+}
+.ground-badge::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -6px;
+  height: 10px;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.0) 70%);
+  filter: blur(6px);
+  opacity: 0.45;
+}
