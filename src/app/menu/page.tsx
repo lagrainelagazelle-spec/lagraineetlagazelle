@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import DropdownMenu from '@/components/DropdownMenu';
 
 export default function MenuPage() {
   const decorativeImages = [
@@ -20,19 +21,7 @@ export default function MenuPage() {
             </div>
           </Link>
           <nav className="flex items-center gap-3 sm:gap-4">
-            <details className="relative">
-              <summary className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary border-[#1AA39A] text-brand-primary text-[#1AA39A] bg-transparent hover:bg-brand-primary hover:bg-[#1AA39A] hover:text-white transition focus:outline-none focus:ring-2 focus:ring-brand-secondary cursor-pointer select-none">Menu</summary>
-              <div className="dropdown-panel absolute left-0 mt-2 w-56 rounded-md border border-gray-200 bg-white shadow-lg z-50">
-                <div className="py-2">
-                  <Link href="/menu#menu-top" className="block px-3 py-2 text-sm font-semibold hover:bg-gray-50">La Graine</Link>
-                  <div className="px-3 py-1.5 text-xs font-semibold text-gray-500 uppercase tracking-wide">Rubriques</div>
-                  <Link href="/menu#la-graine" className="block px-3 py-2 text-sm hover:bg-gray-50">Couscous</Link>
-                  <Link href="/menu#les-tajines" className="block px-3 py-2 text-sm hover:bg-gray-50">Tajines</Link>
-                  <div className="mt-2 border-t" />
-                  <Link href="/menu#la-gazelle" className="block px-3 py-2 text-sm font-semibold hover:bg-gray-50">La Gazelle</Link>
-                </div>
-              </div>
-            </details>
+            <DropdownMenu />
             <Link href="/commande" className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary bg-[#1AA39A] text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]">Commander</Link>
           </nav>
         </div>
