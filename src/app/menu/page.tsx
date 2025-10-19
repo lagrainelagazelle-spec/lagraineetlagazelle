@@ -200,7 +200,7 @@ export default function MenuPage() {
             </div>
             <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">CAPRILU AU CITRON (la pièce)</p>
+                <p className="font-extrabold tracking-wide">CAPRILU AL LEMON (la pièce)</p>
                 <p className="text-sm text-brand-text/70">6 pièces: 15,00 € — 12 pièces: 30,50 €</p>
               </div>
               <span className="font-bold text-brand-primary">3,00 €</span>
