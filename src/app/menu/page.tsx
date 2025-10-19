@@ -11,8 +11,8 @@ export default function MenuPage() {
             </div>
           </Link>
           <nav className="flex items-center gap-3 sm:gap-4">
-            <Link href="/" className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-white transition focus:outline-none focus:ring-2 focus:ring-brand-secondary">Accueil</Link>
-            <Link href="/commande" className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary">Commander</Link>
+            <Link href="/" className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary border-[#1AA39A] text-brand-primary text-[#1AA39A] bg-transparent hover:bg-brand-primary hover:bg-[#1AA39A] hover:text-white transition focus:outline-none focus:ring-2 focus:ring-brand-secondary">Accueil</Link>
+            <Link href="/commande" className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary bg-[#1AA39A] text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]">Commander</Link>
           </nav>
         </div>
       </header>
@@ -31,6 +31,67 @@ export default function MenuPage() {
           </p>
         </section>
 
+        {/* Récapitulatif détaillé (issu de l'affiche) */}
+        <section className="mb-12">
+          <h2 className="text-center text-2xl font-extrabold tracking-widest text-brand-primary mb-6">LA GRAINE</h2>
+          <div className="space-y-5">
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">COUSCOUS ROYAL</p>
+                <p className="text-sm text-brand-text/70">Base végétarienne + poulet + merguez + boulettes</p>
+              </div>
+              <span className="font-bold text-brand-primary">20,00 €</span>
+            </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">COUSCOUS MERGUEZ</p>
+                <p className="text-sm text-brand-text/70">Base végétarienne + merguez</p>
+              </div>
+              <span className="font-bold text-brand-primary">16,50 €</span>
+            </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">COUSCOUS POULET</p>
+                <p className="text-sm text-brand-text/70">Base végétarienne + poulet</p>
+              </div>
+              <span className="font-bold text-brand-primary">16,50 €</span>
+            </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">COUSCOUS BOULETTES</p>
+                <p className="text-sm text-brand-text/70">Base végétarienne + boulettes</p>
+              </div>
+              <span className="font-bold text-brand-primary">17,50 €</span>
+            </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">COUSCOUS 2 VIANDES</p>
+                <p className="text-sm text-brand-text/70">Base végétarienne + 2 viandes au choix</p>
+              </div>
+              <span className="font-bold text-brand-primary">18,50 €</span>
+            </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <div>
+                <p className="font-extrabold tracking-wide">COUSCOUS VÉGÉTARIEN</p>
+                <p className="text-sm text-brand-text/70">Semoule fine, légumes de saison, pois chiches, épices et aromates</p>
+              </div>
+              <span className="font-bold text-brand-primary">14,00 €</span>
+            </div>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="rounded-md border border-amber-200 bg-amber-50 p-4 text-sm">
+              <p className="font-semibold text-brand-text">Allergènes</p>
+              <p className="mt-1 text-brand-text/80">Gluten, céleri, graines de sésame, fruits à coque.</p>
+            </div>
+            <div className="rounded-md border border-brand-primary/30 bg-white p-4 text-sm">
+              <p className="font-semibold text-brand-text">Commande & livraison</p>
+              <p className="mt-1 text-brand-text/80">À partir de 4 couscous. Prévoir jusqu’à 48h selon disponibilité.</p>
+              <p className="mt-1 text-brand-primary font-bold">Contact: 0692 15 44 74</p>
+            </div>
+          </div>
+        </section>
+
         {/* Séparateur motif géométrique discret */}
         <div className="relative mb-10">
           <div className="h-0.5 bg-gradient-to-r from-transparent via-brand-secondary/50 to-transparent" />
@@ -43,98 +104,13 @@ export default function MenuPage() {
           </div>
         </div>
 
-        {/* Grille du menu */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Entrées */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-bold text-brand-primary mb-4">Entrées</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start justify-between">
-                <div>
-                  <p className="font-semibold">Briouates aux amandes</p>
-                  <p className="text-sm text-brand-text/70">Feuilletés dorés, miel et fleur d’oranger</p>
-                </div>
-                <span className="text-brand-secondary font-semibold">4,50 €</span>
-              </li>
-              <li className="flex items-start justify-between">
-                <div>
-                  <p className="font-semibold">Houmous crémeux</p>
-                  <p className="text-sm text-brand-text/70">Pois chiches, tahini, huile d’olive</p>
-                </div>
-                <span className="text-brand-secondary font-semibold">5,90 €</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Plats */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-bold text-brand-primary mb-4">Plats</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start justify-between">
-                <div>
-                  <p className="font-semibold">Tajine de légumes</p>
-                  <p className="text-sm text-brand-text/70">Carottes, courgettes, abricots secs, épices douces</p>
-                </div>
-                <span className="text-brand-secondary font-semibold">12,90 €</span>
-              </li>
-              <li className="flex items-start justify-between">
-                <div>
-                  <p className="font-semibold">Couscous poulet</p>
-                  <p className="text-sm text-brand-text/70">Semoule fine, pois chiches, bouillon safrané</p>
-                </div>
-                <span className="text-brand-secondary font-semibold">13,90 €</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Pâtisseries */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-bold text-brand-primary mb-4">Pâtisseries</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start justify-between">
-                <div>
-                  <p className="font-semibold">Cornes de gazelle</p>
-                  <p className="text-sm text-brand-text/70">Pâte fine, amandes, fleur d’oranger</p>
-                </div>
-                <span className="text-brand-secondary font-semibold">2,50 €</span>
-              </li>
-              <li className="flex items-start justify-between">
-                <div>
-                  <p className="font-semibold">Baklava pistache</p>
-                  <p className="text-sm text-brand-text/70">Filo croustillante, miel, pistaches</p>
-                </div>
-                <span className="text-brand-secondary font-semibold">3,20 €</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Boissons */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-bold text-brand-primary mb-4">Boissons</h2>
-            <ul className="space-y-4">
-              <li className="flex items-start justify-between">
-                <div>
-                  <p className="font-semibold">Thé à la menthe</p>
-                  <p className="text-sm text-brand-text/70">Traditionnel, servi bien chaud</p>
-                </div>
-                <span className="text-brand-secondary font-semibold">2,90 €</span>
-              </li>
-              <li className="flex items-start justify-between">
-                <div>
-                  <p className="font-semibold">Limonade au citron confit</p>
-                  <p className="text-sm text-brand-text/70">Notes d’agrume et de fleur d’oranger</p>
-                </div>
-                <span className="text-brand-secondary font-semibold">3,50 €</span>
-              </li>
-            </ul>
-          </div>
-        </section>
+        {/* Grille précédente supprimée pour harmoniser la présentation avec l'affiche */}
 
         {/* CTA de commande */}
         <div className="mt-12 text-center">
           <Link
             href="/commande"
-            className="inline-flex items-center justify-center px-8 py-3 rounded-md text-white bg-brand-primary hover:bg-opacity-90 shadow-md"
+            className="inline-flex items-center justify-center px-8 py-3 rounded-md text-white bg-brand-primary bg-[#1AA39A] hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]"
           >
             Commander maintenant
           </Link>

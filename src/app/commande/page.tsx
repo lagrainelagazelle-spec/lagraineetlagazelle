@@ -57,10 +57,10 @@ export default function CommandePage() {
             </div>
           </a>
           <nav className="flex items-center gap-3 sm:gap-4">
-            <a href="/menu" className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition">
+            <a href="/menu" className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary border-[#1AA39A] text-brand-primary text-[#1AA39A] bg-transparent hover:bg-brand-primary hover:bg-[#1AA39A] hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition">
               Menu
             </a>
-            <a href="/" className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary">
+            <a href="/" className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary bg-[#1AA39A] text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]">
               Accueil
             </a>
           </nav>
@@ -142,10 +142,14 @@ export default function CommandePage() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-secondary focus:border-brand-secondary sm:text-sm"
                   >
                     <option value="">Sélectionnez un produit</option>
-                    <option value="produit_a">Produit A - Description</option>
-                    <option value="produit_b">Produit B - Description</option>
-                    <option value="produit_c">Produit C - Description</option>
+                    <option value="couscous_royal">Couscous Royal — 20,00 €</option>
+                    <option value="couscous_merguez">Couscous Merguez — 16,50 €</option>
+                    <option value="couscous_poulet">Couscous Poulet — 16,50 €</option>
+                    <option value="couscous_boulettes">Couscous Boulettes — 17,50 €</option>
+                    <option value="couscous_2_viandes">Couscous 2 Viandes — 18,50 €</option>
+                    <option value="couscous_vegetarien">Couscous Végétarien — 14,00 €</option>
                   </select>
+                  <p className="mt-2 text-xs text-brand-text/70">Pour "2 viandes", précisez vos choix (poulet, merguez, boulettes) dans les commentaires.</p>
                 </div>
               </div>
                <div>
@@ -157,12 +161,13 @@ export default function CommandePage() {
                     type="number"
                     name="quantity"
                     id="quantity"
-                    min="1"
+                    min="4"
                     required
                     value={formData.quantity}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-brand-secondary focus:border-brand-secondary sm:text-sm"
                   />
+                  <p className="mt-2 text-xs text-brand-text/70">Minimum 4 couscous par commande.</p>
                 </div>
               </div>
             </div>
@@ -203,7 +208,7 @@ export default function CommandePage() {
             <div className="pt-6">
               <button
                 type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-primary hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-secondary"
+                className="w-full flex justify-center py-3 px-4 rounded-md text-sm font-semibold text-white bg-brand-primary bg-[#1AA39A] hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]"
               >
                 Passer au paiement
               </button>

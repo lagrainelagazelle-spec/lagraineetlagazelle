@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { headers } from 'next/headers';
 import { appendToSheet } from '@/lib/google-sheets';
 import { Resend } from 'resend';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2024-04-10',
+  apiVersion: '2025-09-30.clover',
 });
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET as string;
@@ -13,7 +12,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
   const buf = await req.text();
-  const sig = headers().get('stripe-signature')!;
+  const sig = req.headers.get('stripe-signature')!;
 
   let event: Stripe.Event;
 
@@ -64,4 +63,9 @@ export async function POST(req: NextRequest) {
 
       break;
     default:
-      console.warn(`
+      console.warn(`Unhandled event type: ${event.type}`);
+      break;
+  }
+
+  return NextResponse.json({ received: true }, { status: 200 });
+}

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -11,13 +12,13 @@ export default function Home() {
           <nav className="flex items-center gap-3 sm:gap-4">
             <Link
               href="/menu"
-              className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition"
+              className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary border-[#1AA39A] text-brand-primary text-[#1AA39A] bg-transparent hover:bg-brand-primary hover:bg-[#1AA39A] hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition"
             >
               Menu
             </Link>
             <Link
               href="/commande"
-              className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition"
+              className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary bg-[#1AA39A] text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]"
             >
               Commander
             </Link>
@@ -26,11 +27,16 @@ export default function Home() {
       </header>
 
       <main className="text-center py-20 px-4 sm:px-6 lg:px-8">
-        <div 
-          className="mx-auto max-w-5xl h-96 bg-cover bg-center rounded-lg shadow-xl" 
-          style={{ backgroundImage: "url('/images/image.png')" }}
-        >
-          {/* L'image de fond est ici */}
+        <div className="mx-auto max-w-5xl">
+          <Image
+            src="/images/acceuil.png"
+            alt="La Graine et La Gazelle - visuel d'accueil"
+            width={1530}
+            height={900}
+            priority
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1024px"
+            className="w-full h-auto rounded-lg shadow-xl"
+          />
         </div>
 
         <h1 className="mt-12 text-4xl font-extrabold text-brand-primary sm:text-5xl md:text-6xl">
@@ -43,7 +49,7 @@ export default function Home() {
           <div className="rounded-md shadow">
             <Link
               href="/commande"
-              className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary text-brand-primary bg-transparent hover:bg-brand-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition"
+              className="text-sm font-bold px-6 py-3 rounded-md bg-brand-primary bg-[#1AA39A] text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]"
             >
               Commencer ma précommande
             </Link>
