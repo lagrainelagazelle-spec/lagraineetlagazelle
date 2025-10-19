@@ -3,12 +3,29 @@ import Stripe from 'stripe';
 import { appendToSheet } from '@/lib/google-sheets';
 import { Resend } from 'resend';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2025-09-30.clover',
-});
+function getStripe(): Stripe {
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  if (!secretKey) {
+    throw new Error('STRIPE_SECRET_KEY is not set');
+  }
+  return new Stripe(secretKey, { apiVersion: '2025-09-30.clover' });
+}
 
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET as string;
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getWebhookSecret(): string {
+  const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!secret) {
+    throw new Error('STRIPE_WEBHOOK_SECRET is not set');
+  }
+  return secret;
+}
+
+function getResend(): Resend {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) {
+    throw new Error('RESEND_API_KEY is not set');
+  }
+  return new Resend(key);
+}
 
 export async function POST(req: NextRequest) {
   const buf = await req.text();
@@ -17,7 +34,8 @@ export async function POST(req: NextRequest) {
   let event: Stripe.Event;
 
   try {
-    event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
+    const stripe = getStripe();
+    event = stripe.webhooks.constructEvent(buf, sig, getWebhookSecret());
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : 'Unknown error';
     console.log(`❌ Error message: ${errorMessage}`);
@@ -40,6 +58,7 @@ export async function POST(req: NextRequest) {
 
         // 2. Envoyer un email de notification
         try {
+          const resend = getResend();
           await resend.emails.send({
             from: 'noreply@votre-domaine.com', // Doit être un domaine vérifié sur Resend
             to: 'votre-email@gmail.com', // Votre adresse email

@@ -1,17 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-// Initialiser Stripe avec votre clé secrète
-// Assurez-vous de la stocker dans des variables d'environnement (.env.local)
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2025-09-30.clover',
-});
+// Initialiser Stripe paresseusement pour éviter les erreurs au build si l'env manque
+function getStripe(): Stripe {
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  if (!secretKey) {
+    throw new Error('STRIPE_SECRET_KEY is not set');
+  }
+  return new Stripe(secretKey, {
+    apiVersion: '2025-09-30.clover',
+  });
+}
 
 export async function POST(req: NextRequest) {
   try {
+    const stripe = getStripe();
     const body = await req.json();
     const { product, quantity, fullName, email, phone, address, comments } = body;
 
+    
     // TODO: Récupérer le prix depuis une base de données ou une configuration
     // Pour l'instant, nous utilisons des valeurs fixes
     const productDetails = {

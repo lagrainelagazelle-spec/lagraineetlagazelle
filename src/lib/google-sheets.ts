@@ -19,7 +19,7 @@ export async function appendToSheet(data: OrderData) {
     const spreadsheetId = process.env.GOOGLE_SHEET_ID;
 
     // Définir l'ordre des colonnes
-    const headers = ['Date', 'Nom complet', 'Email', 'Téléphone', 'Produit', 'Quantité', 'Adresse', 'Commentaires'];
+    const headersRow = ['Date', 'Nom complet', 'Email', 'Téléphone', 'Produit', 'Quantité', 'Adresse', 'Commentaires'];
     
     // Formatter les données pour correspondre à l'ordre des en-têtes
     const rowData = [
