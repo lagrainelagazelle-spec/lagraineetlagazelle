@@ -47,7 +47,7 @@ export default function CommandePage() {
     e.preventDefault();
     
     try {
-      // Validation: au moins 4 couscous (clés qui commencent par "couscous_")
+      // Validation: au moins 4 plats (clés qui commencent par "couscous_")
       const couscousCount = formData.items
         .filter((it) => it.product.startsWith('couscous_'))
         .reduce((sum, it) => sum + (Number(it.quantity) || 0), 0);
