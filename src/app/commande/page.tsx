@@ -89,9 +89,6 @@ export default function CommandePage() {
           </Link>
           <nav className="flex items-center gap-3 sm:gap-4">
             <DropdownMenu />
-            <Link href="/menu" className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary bg-[#1AA39A] text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]">
-              Menu
-            </Link>
           </nav>
         </div>
       </header>
