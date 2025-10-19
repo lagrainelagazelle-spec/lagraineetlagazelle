@@ -4,7 +4,7 @@ import Stripe from 'stripe';
 // Initialiser Stripe avec votre clé secrète
 // Assurez-vous de la stocker dans des variables d'environnement (.env.local)
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2024-04-10',
+  apiVersion: '2025-09-30.clover',
 });
 
 export async function POST(req: NextRequest) {
