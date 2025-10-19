@@ -8,6 +8,9 @@ export default function ConfirmationPage() {
           <Link href="/menu" className="flex items-center">
             <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-16 w-auto" />
           </Link>
+          <nav className="flex items-center gap-3 sm:gap-4">
+            {/* Liens sociaux dans le header global via layout.tsx */}
+          </nav>
         </div>
       </header>
 
