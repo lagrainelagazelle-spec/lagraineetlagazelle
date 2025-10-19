@@ -8,7 +8,7 @@ function getStripe(): Stripe {
   if (!secretKey) {
     throw new Error('STRIPE_SECRET_KEY is not set');
   }
-  return new Stripe(secretKey, { apiVersion: '2025-09-30.clover' });
+  return new Stripe(secretKey);
 }
 
 function getWebhookSecret(): string {
@@ -54,22 +54,59 @@ export async function POST(req: NextRequest) {
 
       if (metadata) {
         // 1. Ajouter à Google Sheets
-        await appendToSheet(metadata);
+        try {
+          const itemsJson = metadata.items;
+          if (itemsJson) {
+            // Essayer de parser la liste d'articles envoyée par create-checkout-session
+            const parsedItems = JSON.parse(itemsJson as unknown as string) as Array<{ product: string; quantity: number }>;
+            if (Array.isArray(parsedItems) && parsedItems.length > 0) {
+              for (const item of parsedItems) {
+                await appendToSheet({
+                  fullName: metadata.fullName,
+                  email: metadata.email,
+                  phone: metadata.phone,
+                  product: item.product,
+                  quantity: item.quantity,
+                  address: metadata.address,
+                  comments: metadata.comments,
+                });
+              }
+            } else {
+              await appendToSheet(metadata);
+            }
+          } else {
+            // Rétrocompatibilité si un seul produit a été envoyé
+            await appendToSheet(metadata);
+          }
+        } catch (e) {
+          console.error('❌ Erreur parsing/envoi vers Google Sheets:', e);
+        }
 
         // 2. Envoyer un email de notification
         try {
           const resend = getResend();
+          const sender = process.env.SENDER_EMAIL || 'noreply@votre-domaine.com';
+          const recipient = process.env.DESTINATION_EMAIL || 'votre-email@gmail.com';
+          const lines = (() => {
+            try {
+              const items = metadata.items ? JSON.parse(metadata.items as unknown as string) as Array<{ product: string; quantity: number }> : [];
+              if (Array.isArray(items) && items.length > 0) {
+                return items.map((it) => `<li>${it.product} × ${it.quantity}</li>`).join('');
+              }
+            } catch {}
+            return `<li>${metadata.product} × ${metadata.quantity}</li>`;
+          })();
           await resend.emails.send({
-            from: 'noreply@votre-domaine.com', // Doit être un domaine vérifié sur Resend
-            to: 'votre-email@gmail.com', // Votre adresse email
+            from: sender,
+            to: recipient,
             subject: `Nouvelle précommande de ${metadata.fullName}`,
             html: `
               <h1>Nouvelle précommande !</h1>
               <p><strong>Nom:</strong> ${metadata.fullName}</p>
               <p><strong>Email:</strong> ${metadata.email}</p>
               <p><strong>Téléphone:</strong> ${metadata.phone}</p>
-              <p><strong>Produit:</strong> ${metadata.product}</p>
-              <p><strong>Quantité:</strong> ${metadata.quantity}</p>
+              <p><strong>Articles:</strong></p>
+              <ul>${lines}</ul>
               <p><strong>Adresse:</strong> ${metadata.address}</p>
               <p><strong>Commentaires:</strong> ${metadata.comments || 'Aucun'}</p>
             `,
