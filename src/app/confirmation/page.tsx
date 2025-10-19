@@ -5,7 +5,7 @@ export default function ConfirmationPage() {
     <div className="bg-brand-background text-brand-text min-h-screen">
       <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <Link href="/" className="flex items-center">
+          <Link href="/menu" className="flex items-center">
             <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-16 w-auto" />
           </Link>
         </div>
@@ -21,7 +21,7 @@ export default function ConfirmationPage() {
           <p className="mt-2 text-gray-600">Vous recevrez bientôt un email de confirmation contenant les détails de votre commande.</p>
           <div className="mt-8">
             <Link
-              href="/"
+              href="/menu"
               className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-primary hover:bg-opacity-90"
             >
               Retour à l&apos;accueil

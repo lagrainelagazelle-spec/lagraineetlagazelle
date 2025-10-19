@@ -15,7 +15,7 @@ export default function MenuPage() {
     <div className="bg-white text-brand-text min-h-screen">
       <header className="bg-white text-brand-text shadow-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <Link href="/" className="flex items-center">
+          <Link href="/menu" className="flex items-center">
             <div className="p-1 rounded-full logo-ring">
               <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-16 w-16 object-cover rounded-full" />
             </div>
