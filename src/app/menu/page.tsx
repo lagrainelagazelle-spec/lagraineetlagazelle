@@ -19,12 +19,14 @@ export default function MenuPage() {
 
       {/* Bandeau d'incitation commande/livraison */}
       <section className="bg-brand-secondary/20 border-y border-brand-secondary/40">
-        <div className="max-w-5xl mx-auto px-4 py-3 text-center text-sm sm:text-base">
-          <span className="font-semibold text-brand-text">Commande & livraison</span>
-          <span className="mx-2">·</span>
-          À partir de 4 plats. Prévoir jusqu’à 48h selon disponibilité.
-          <span className="mx-2">·</span>
-          <a href="tel:0692154474" className="font-bold text-brand-primary underline-offset-2 hover:underline">0692 15 44 74</a>
+        <div className="max-w-5xl mx-auto px-4 py-3 text-center">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-center gap-y-1 sm:gap-x-2 text-sm sm:text-base">
+            <span className="font-semibold text-brand-text">Commande & livraison</span>
+            <span className="hidden sm:inline">·</span>
+            <span>À partir de 4 plats. Prévoir jusqu’à 48h selon disponibilité.</span>
+            <span className="hidden sm:inline">·</span>
+            <a href="tel:0692154474" className="font-bold text-brand-primary underline-offset-2 hover:underline">0692 15 44 74</a>
+          </div>
         </div>
       </section>
 
@@ -46,42 +48,42 @@ export default function MenuPage() {
         <section className="mb-12">
           <h2 className="text-center text-2xl font-extrabold tracking-widest text-brand-primary mb-6">LA GRAINE</h2>
           <div className="space-y-5">
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div>
                 <p className="font-extrabold tracking-wide">COUSCOUS ROYAL</p>
                 <p className="text-sm text-brand-text/70">Base végétarienne + poulet + merguez + boulettes</p>
               </div>
               <span className="font-bold text-brand-primary">20,00 €</span>
             </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div>
                 <p className="font-extrabold tracking-wide">COUSCOUS MERGUEZ</p>
                 <p className="text-sm text-brand-text/70">Base végétarienne + merguez</p>
               </div>
               <span className="font-bold text-brand-primary">16,50 €</span>
             </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div>
                 <p className="font-extrabold tracking-wide">COUSCOUS POULET</p>
                 <p className="text-sm text-brand-text/70">Base végétarienne + poulet</p>
               </div>
               <span className="font-bold text-brand-primary">16,50 €</span>
             </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div>
                 <p className="font-extrabold tracking-wide">COUSCOUS BOULETTES</p>
                 <p className="text-sm text-brand-text/70">Base végétarienne + boulettes</p>
               </div>
               <span className="font-bold text-brand-primary">17,50 €</span>
             </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div>
                 <p className="font-extrabold tracking-wide">COUSCOUS 2 VIANDES</p>
                 <p className="text-sm text-brand-text/70">Base végétarienne + 2 viandes au choix</p>
               </div>
               <span className="font-bold text-brand-primary">18,50 €</span>
             </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div>
                 <p className="font-extrabold tracking-wide">COUSCOUS VÉGÉTARIEN</p>
                 <p className="text-sm text-brand-text/70">Semoule fine, légumes de saison, pois chiches, épices et aromates</p>
@@ -93,28 +95,28 @@ export default function MenuPage() {
           {/* Tajines */}
           <div className="mt-8 space-y-5">
             <h3 className="text-center text-xl font-extrabold tracking-widest text-brand-primary mb-2">TAJINES</h3>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div>
                 <p className="font-extrabold tracking-wide">TAJINE POULET ABRICOT</p>
                 <p className="text-sm text-brand-text/70">Base végétarienne + poulet + abricots confits et oignons confits</p>
               </div>
               <span className="font-bold text-brand-primary">19,50 €</span>
             </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div>
                 <p className="font-extrabold tracking-wide">TAJINE POULET AMANDES</p>
                 <p className="text-sm text-brand-text/70">Base végétarienne + amandes et olives</p>
               </div>
               <span className="font-bold text-brand-primary">19,50 €</span>
             </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div>
                 <p className="font-extrabold tracking-wide">TAJINE KEFTA PRUNEAUX</p>
                 <p className="text-sm text-brand-text/70">Base végétarienne + kefta + pruneaux et raisins confits</p>
               </div>
               <span className="font-bold text-brand-primary">18,50 €</span>
             </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div>
                 <p className="font-extrabold tracking-wide">TAJINE VÉGÉTARIEN</p>
                 <p className="text-sm text-brand-text/70">Légumes de saison, pommes de terre, petits pois, piment doux</p>
