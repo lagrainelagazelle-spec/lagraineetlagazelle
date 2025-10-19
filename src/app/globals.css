@@ -42,6 +42,11 @@ html {
   background-color: #fff;
 }
 
+/* Dropdown via <details>/<summary> */
+summary::-webkit-details-marker { display: none; }
+details[open] > .dropdown-panel { display: block; }
+.dropdown-panel { display: none; }
+
 /* Placeholders plus lisibles */
 input::placeholder,
 textarea::placeholder {

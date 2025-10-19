@@ -20,18 +20,19 @@ export default function MenuPage() {
             </div>
           </Link>
           <nav className="flex items-center gap-3 sm:gap-4">
-            <div className="relative group">
-              <Link href="/menu" className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary border-[#1AA39A] text-brand-primary text-[#1AA39A] bg-transparent hover:bg-brand-primary hover:bg-[#1AA39A] hover:text-white transition focus:outline-none focus:ring-2 focus:ring-brand-secondary">Menu</Link>
-              <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-150 absolute left-0 mt-2 w-56 rounded-md border border-gray-200 bg-white shadow-lg z-50">
+            <details className="relative">
+              <summary className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary border-[#1AA39A] text-brand-primary text-[#1AA39A] bg-transparent hover:bg-brand-primary hover:bg-[#1AA39A] hover:text-white transition focus:outline-none focus:ring-2 focus:ring-brand-secondary cursor-pointer select-none">Menu</summary>
+              <div className="dropdown-panel absolute left-0 mt-2 w-56 rounded-md border border-gray-200 bg-white shadow-lg z-50">
                 <div className="py-2">
-                  <div className="px-3 py-1.5 text-xs font-semibold text-gray-500 uppercase tracking-wide">La Graine</div>
+                  <Link href="/menu#menu-top" className="block px-3 py-2 text-sm font-semibold hover:bg-gray-50">La Graine</Link>
+                  <div className="px-3 py-1.5 text-xs font-semibold text-gray-500 uppercase tracking-wide">Rubriques</div>
                   <Link href="/menu#la-graine" className="block px-3 py-2 text-sm hover:bg-gray-50">Couscous</Link>
                   <Link href="/menu#les-tajines" className="block px-3 py-2 text-sm hover:bg-gray-50">Tajines</Link>
                   <div className="mt-2 border-t" />
                   <Link href="/menu#la-gazelle" className="block px-3 py-2 text-sm font-semibold hover:bg-gray-50">La Gazelle</Link>
                 </div>
               </div>
-            </div>
+            </details>
             <Link href="/commande" className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary bg-[#1AA39A] text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]">Commander</Link>
           </nav>
         </div>
@@ -52,7 +53,7 @@ export default function MenuPage() {
 
       
 
-      <main className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <main id="menu-top" className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         {/* En-tête stylisée oriental */}
         <section className="text-center mb-12">
           {/* Titre déplacé au-dessus du carrousel */}
