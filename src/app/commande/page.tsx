@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function CommandePage() {
   const [formData, setFormData] = useState({
@@ -51,18 +52,18 @@ export default function CommandePage() {
     <div className="bg-white text-brand-text min-h-screen">
       <header className="bg-white text-brand-text shadow-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <a href="/" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <div className="p-1 rounded-full logo-ring">
               <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-12 w-12 object-cover rounded-full" />
             </div>
-          </a>
+          </Link>
           <nav className="flex items-center gap-3 sm:gap-4">
-            <a href="/menu" className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary border-[#1AA39A] text-brand-primary text-[#1AA39A] bg-transparent hover:bg-brand-primary hover:bg-[#1AA39A] hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition">
+            <Link href="/menu" className="text-sm font-bold px-4 py-2 rounded-md border-2 border-brand-primary border-[#1AA39A] text-brand-primary text-[#1AA39A] bg-transparent hover:bg-brand-primary hover:bg-[#1AA39A] hover:text-white focus:outline-none focus:ring-2 focus:ring-brand-secondary transition">
               Menu
-            </a>
-            <a href="/" className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary bg-[#1AA39A] text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]">
+            </Link>
+            <Link href="/" className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary bg-[#1AA39A] text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]">
               Accueil
-            </a>
+            </Link>
           </nav>
         </div>
       </header>
@@ -147,9 +148,8 @@ export default function CommandePage() {
                     <option value="couscous_poulet">Couscous Poulet — 16,50 €</option>
                     <option value="couscous_boulettes">Couscous Boulettes — 17,50 €</option>
                     <option value="couscous_2_viandes">Couscous 2 Viandes — 18,50 €</option>
-                    <option value="couscous_vegetarien">Couscous Végétarien — 14,00 €</option>
                   </select>
-                  <p className="mt-2 text-xs text-brand-text/70">Pour "2 viandes", précisez vos choix (poulet, merguez, boulettes) dans les commentaires.</p>
+                  <p className="mt-2 text-xs text-brand-text/70">Pour &quot;2 viandes&quot;, précisez vos choix (poulet, merguez, boulettes) dans les commentaires.</p>
                 </div>
               </div>
                <div>
