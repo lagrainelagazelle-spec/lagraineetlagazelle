@@ -39,6 +39,18 @@ export default function MenuPage() {
         </div>
       </section>
 
+      {/* Sous-menu d'ancrage vers les sections du menu */}
+      <nav className="bg-white border-y border-brand-secondary/40">
+        <div className="max-w-5xl mx-auto px-4 py-2 flex items-center justify-center gap-3 sm:gap-4">
+          <a href="#la-graine" className="text-sm font-bold px-3 py-1.5 rounded-md border-2 border-[#1AA39A] text-[#1AA39A] hover:bg-[#1AA39A] hover:text-white transition">
+            La Graine
+          </a>
+          <a href="#la-gazelle" className="text-sm font-bold px-3 py-1.5 rounded-md border-2 border-[#1AA39A] text-[#1AA39A] hover:bg-[#1AA39A] hover:text-white transition">
+            La Gazelle
+          </a>
+        </div>
+      </nav>
+
       <main className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         {/* En-tête stylisée oriental */}
         <section className="text-center mb-12">
@@ -76,7 +88,7 @@ export default function MenuPage() {
         </section>
 
         {/* Récapitulatif détaillé (issu de l'affiche) */}
-        <section className="mb-12">
+        <section id="la-graine" className="mb-12 scroll-mt-24">
           <h2 className="text-center text-2xl font-extrabold tracking-widest text-brand-primary mb-6">LA GRAINE</h2>
           <div className="space-y-5">
             <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
@@ -165,7 +177,7 @@ export default function MenuPage() {
         </section>
 
         {/* Section pâtisseries - La Gazelle */}
-        <section className="mb-12">
+        <section id="la-gazelle" className="mb-12 scroll-mt-24">
           <h2 className="text-center text-2xl font-extrabold tracking-widest text-brand-primary mb-6">LA GAZELLE</h2>
           <div className="space-y-5">
             <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
