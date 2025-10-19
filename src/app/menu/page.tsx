@@ -173,7 +173,10 @@ export default function MenuPage() {
         {/* Section pâtisseries - La Gazelle */}
         <section id="la-gazelle" className="mb-12 scroll-mt-24">
           <h2 className="text-center text-2xl font-extrabold tracking-widest text-brand-primary mb-6">LA GAZELLE</h2>
-          <div className="space-y-5">
+
+          {/* Sous-section: Mignardises */}
+          <div id="mignardises" className="space-y-5 scroll-mt-24">
+            <h3 className="text-center text-xl font-extrabold tracking-widest text-brand-primary mb-2">LES MIGNARDISES</h3>
             <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
               <div className="flex-1 min-w-0">
                 <p className="font-extrabold tracking-wide">CORNE DE GAZELLE (la pièce)</p>
@@ -204,15 +207,22 @@ export default function MenuPage() {
             </div>
           </div>
 
-          <div className="mt-6 rounded-md border border-amber-200 bg-amber-50 p-4 text-sm">
-            <p className="font-semibold text-brand-text">Coffrets</p>
-            <ul className="mt-1 text-brand-text/80 list-disc list-inside">
-              <li>Mix 6 pièces: 12,50 €</li>
-              <li>Mix 12 pièces: 24,90 €</li>
-              <li>Mix 18 pièces: 37,90 €</li>
-              <li>Quantité supérieure sur demande</li>
-            </ul>
-            <p className="mt-2 text-xs text-brand-text/60">Allergènes: gluten, fruits à coque et lait.</p>
+          {/* Sous-section: Coffrets */}
+          <div id="coffrets" className="mt-8 space-y-3 scroll-mt-24">
+            <h3 className="text-center text-xl font-extrabold tracking-widest text-brand-primary mb-2">LES COFFRETS</h3>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <span className="font-semibold">Mix 6 pièces</span>
+              <span className="font-bold text-brand-primary">12,50 €</span>
+            </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <span className="font-semibold">Mix 12 pièces</span>
+              <span className="font-bold text-brand-primary">24,90 €</span>
+            </div>
+            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
+              <span className="font-semibold">Mix 18 pièces</span>
+              <span className="font-bold text-brand-primary">37,90 €</span>
+            </div>
+            <p className="text-xs text-brand-text/60 text-center">Quantité supérieure sur demande · Allergènes: gluten, fruits à coque et lait.</p>
           </div>
         </section>
 

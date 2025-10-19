@@ -57,6 +57,12 @@ export default function DropdownMenu() {
             <Link href="/menu#la-gazelle" onClick={close} className="block px-3 py-2 text-sm font-semibold hover:bg-gray-50">
               La Gazelle
             </Link>
+            <Link href="/menu#mignardises" onClick={close} className="block px-6 py-2 text-sm hover:bg-gray-50">
+              Mignardises
+            </Link>
+            <Link href="/menu#coffrets" onClick={close} className="block px-6 py-2 text-sm hover:bg-gray-50">
+              Coffrets
+            </Link>
           </div>
         </div>
       )}
