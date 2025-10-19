@@ -42,9 +42,9 @@ export default function MenuPage() {
       <main className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         {/* En-tête stylisée oriental */}
         <section className="text-center mb-12">
-          <p className="mt-4 max-w-2xl mx-auto text-brand-text/90">
+          <h6 className="text-2xl font-extrabold text-brand-primary">
             Sélection raffinée inspirée des saveurs d’Orient.
-          </p>
+          </h6>
           {/* Bandeau défilant de motifs (graines & gazelles) */}
           <div className="mt-8 marquee-container py-4 bg-brand-background/60 rounded-md">
             <div className="marquee-track">
