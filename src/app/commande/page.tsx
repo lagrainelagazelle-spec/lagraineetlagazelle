@@ -84,7 +84,7 @@ export default function CommandePage() {
         <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <Link href="/" className="flex items-center">
             <div className="p-1 rounded-full logo-ring">
-              <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-12 w-12 object-cover rounded-full" />
+              <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-16 w-16 object-cover rounded-full" />
             </div>
           </Link>
           <nav className="flex items-center gap-3 sm:gap-4">

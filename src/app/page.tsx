@@ -8,7 +8,7 @@ export default function Home() {
       <header className="bg-white text-brand-text shadow-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="p-1 rounded-full logo-ring">
-            <Image src="/images/logo_lglg.png" alt="La Graine et La Gazelle" width={48} height={48} className="h-12 w-12 object-cover rounded-full" />
+            <Image src="/images/logo_lglg.png" alt="La Graine et La Gazelle" width={64} height={64} className="h-16 w-16 object-cover rounded-full" />
           </div>
           <nav className="flex items-center gap-3 sm:gap-4">
             <DropdownMenu />
