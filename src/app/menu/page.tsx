@@ -163,7 +163,7 @@ export default function MenuPage() {
           </div>
 
           <div className="mt-6">
-            <div className="rounded-md border border-amber-200 bg-amber-50 p-4 text-sm">
+            <div className="rounded-md border border-amber-200 bg-white p-4 text-sm">
               <p className="font-semibold text-brand-text">Allergènes</p>
               <p className="mt-1 text-brand-text/80">Gluten, céleri, graines de sésame, fruits à coque.</p>
             </div>
@@ -222,7 +222,11 @@ export default function MenuPage() {
               <span className="font-semibold">Mix 18 pièces</span>
               <span className="font-bold text-brand-primary">37,90 €</span>
             </div>
-            <p className="text-xs text-brand-text/60 text-center">Quantité supérieure sur demande · Allergènes: gluten, fruits à coque et lait.</p>
+            <p className="text-xs text-brand-text/60 text-center">Quantité supérieure sur demande</p>
+            <div className="rounded-md border border-amber-200 bg-white p-4 text-sm">
+              <p className="font-semibold text-brand-text">Allergènes</p>
+              <p className="mt-1 text-brand-text/80">gluten, fruits à coque et lait.</p>
+            </div>
           </div>
         </section>
 
