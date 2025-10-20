@@ -112,26 +112,6 @@ export async function POST(req: NextRequest) {
             `,
           });
           console.log('✅ Email de notification envoyé.');
-
-          // 3. Envoyer un email de confirmation au client
-          if (metadata.email) {
-            await resend.emails.send({
-              from: sender,
-              to: metadata.email,
-              subject: 'Votre précommande a été reçue ✔️',
-              html: `
-                <h1>Merci pour votre précommande</h1>
-                <p>Bonjour ${metadata.fullName},</p>
-                <p>Nous avons bien reçu votre précommande. Voici le récapitulatif:</p>
-                <ul>${lines}</ul>
-                <p><strong>Adresse de livraison:</strong> ${metadata.address}</p>
-                <p><strong>Commentaires:</strong> ${metadata.comments || 'Aucun'}</p>
-                <p style="margin-top:12px">Vous recevrez un message de notre part pour la confirmation suivante (disponibilité, créneau, etc.).</p>
-                <p>— La Graine et La Gazelle</p>
-              `,
-            });
-            console.log('✅ Email de confirmation client envoyé.');
-          }
         } catch (error) {
           console.error('❌ Erreur lors de l-envoi de l-email:', error);
         }
