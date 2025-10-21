@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getStripeBreakdown } from '@/lib/pricing';
+import { getStripeBreakdown, ProductId } from '@/lib/pricing';
 
 // Initialiser Stripe paresseusement pour éviter les erreurs au build si l'env manque
 function getStripe(): Stripe {
@@ -57,7 +57,8 @@ export async function POST(req: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: requestedItems.flatMap((it: { product: string; quantity: number }) => {
-        const breakdown = getStripeBreakdown(it.product as any, Number(it.quantity || 0));
+        const productId = it.product as ProductId;
+        const breakdown = getStripeBreakdown(productId, Number(it.quantity || 0));
         if (breakdown.length > 0) {
           return breakdown.map((b) => ({
             price_data: {
