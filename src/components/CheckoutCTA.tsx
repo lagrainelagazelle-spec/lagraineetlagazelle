@@ -20,8 +20,8 @@ export default function CheckoutCTA() {
   const handleClick = () => {
     try {
       const raw = window.localStorage.getItem('cartItems');
-      const items = raw ? JSON.parse(raw) : [];
-      const hasItems = Array.isArray(items) && items.reduce((s: number, it: any) => s + Number(it?.quantity || 0), 0) > 0;
+      const items: Array<{ quantity?: number }> = raw ? JSON.parse(raw) : [];
+      const hasItems = Array.isArray(items) && items.reduce((s: number, it) => s + Number(it?.quantity || 0), 0) > 0;
       if (!hasItems) {
         setShowToast(true);
         setToastVisible(false);

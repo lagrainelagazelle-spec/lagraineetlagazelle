@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   try {
     const stripe = getStripe();
     const body = await req.json();
-    const { items, product, quantity, fullName, email, phone, address, comments } = body;
+    const { items, product, quantity, fullName, email, phone, houseNumber, streetLine1, streetLine2, postcode, city, comments } = body;
 
     
     // TODO: Récupérer le prix depuis une base de données ou une configuration
@@ -87,7 +87,11 @@ export async function POST(req: NextRequest) {
         fullName,
         email,
         phone,
-        address,
+        houseNumber,
+        streetLine1,
+        streetLine2,
+        postcode,
+        city,
         comments,
         items: JSON.stringify(requestedItems),
       },

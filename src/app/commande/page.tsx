@@ -5,6 +5,7 @@ import Link from 'next/link';
 import DropdownMenu from '@/components/DropdownMenu';
 import CartSummaryButton from '@/components/CartSummaryButton';
 import { productPricesCents, productLabels, formatEuroFromCents } from '@/lib/pricing';
+import AddressAutocomplete from '@/components/AddressAutocomplete';
 
 export default function CommandePage() {
   type OrderItem = { product: string; quantity: number };
@@ -13,7 +14,11 @@ export default function CommandePage() {
     email: '',
     phone: '',
     items: [] as OrderItem[],
-    address: '',
+    houseNumber: '',
+    streetLine1: '',
+    streetLine2: '',
+    postcode: '',
+    city: '',
     comments: '',
   });
 
@@ -148,9 +153,40 @@ export default function CommandePage() {
                 <label htmlFor="phone" className="block text-sm font-medium text-brand-text">Numéro de téléphone</label>
                 <input type="tel" name="phone" id="phone" autoComplete="tel" required value={formData.phone} onChange={handleChange} className="mt-1 w-full px-3 py-2 border rounded-md shadow-sm focus:ring-brand-secondary focus:border-brand-secondary sm:text-sm" />
               </div>
+              <div>
+                <label htmlFor="houseNumber" className="block text-sm font-medium text-brand-text">N°</label>
+                <input id="houseNumber" name="houseNumber" value={formData.houseNumber} onChange={handleChange} className="mt-1 w-full px-3 py-2 border rounded-md shadow-sm focus:ring-brand-secondary focus:border-brand-secondary sm:text-sm" />
+              </div>
               <div className="sm:col-span-2">
-                <label htmlFor="address" className="block text-sm font-medium text-brand-text">Adresse de livraison</label>
-                <textarea id="address" name="address" rows={4} required value={formData.address} onChange={handleChange} className="mt-1 w-full px-3 py-2 border rounded-md shadow-sm focus:ring-brand-secondary focus:border-brand-secondary sm:text-sm"></textarea>
+                <label htmlFor="streetLine1" className="block text-sm font-medium text-brand-text">Adresse (n° et rue)</label>
+                <div className="mt-1">
+                  <AddressAutocomplete
+                    id="streetLine1"
+                    value={formData.streetLine1}
+                    onChange={(addr) => setFormData((prev) => ({ ...prev, streetLine1: addr }))}
+                    onSelect={(props) => setFormData((prev) => ({
+                      ...prev,
+                      houseNumber: props.housenumber || prev.houseNumber,
+                      streetLine1: props.label,
+                      postcode: props.postcode || prev.postcode,
+                      city: props.city || prev.city,
+                    }))}
+                    placeholder="Ex: 10 rue de la Paix, Paris"
+                  />
+                </div>
+                <p className="mt-1 text-xs text-brand-text/70">Autocomplétion par API Adresse data.gouv.fr</p>
+              </div>
+              <div className="sm:col-span-2">
+                <label htmlFor="streetLine2" className="block text-sm font-medium text-brand-text">Complément d’adresse (optionnel)</label>
+                <input id="streetLine2" name="streetLine2" value={formData.streetLine2} onChange={handleChange} className="mt-1 w-full px-3 py-2 border rounded-md shadow-sm focus:ring-brand-secondary focus:border-brand-secondary sm:text-sm" />
+              </div>
+              <div>
+                <label htmlFor="postcode" className="block text-sm font-medium text-brand-text">Code postal</label>
+                <input id="postcode" name="postcode" value={formData.postcode} onChange={handleChange} className="mt-1 w-full px-3 py-2 border rounded-md shadow-sm focus:ring-brand-secondary focus:border-brand-secondary sm:text-sm" />
+              </div>
+              <div>
+                <label htmlFor="city" className="block text-sm font-medium text-brand-text">Ville</label>
+                <input id="city" name="city" value={formData.city} onChange={handleChange} className="mt-1 w-full px-3 py-2 border rounded-md shadow-sm focus:ring-brand-secondary focus:border-brand-secondary sm:text-sm" />
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="comments" className="block text-sm font-medium text-brand-text">Commentaires (optionnel)</label>
@@ -158,12 +194,11 @@ export default function CommandePage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between pt-2">
+            <div className="flex items-center justify-between pt-4">
               <Link href="/panier" className="inline-flex items-center justify-center px-4 py-2 rounded-md border-2 border-brand-primary border-[#1AA39A] text-brand-primary hover:bg-brand-primary hover:bg-[#1AA39A] hover:text-white text-sm font-semibold">← Retour au panier</Link>
               <div />
             </div>
-
-            <div className="pt-6">
+            <div className="pt-4">
               <button
                 type="submit"
                 className="w-full flex justify-center py-3 px-4 rounded-md text-sm font-semibold text-white bg-brand-primary bg-[#1AA39A] hover:bg-brand-primary/90 hover:bg-[#1AA39A]/90 shadow-md hover:shadow-lg active:scale-95 transition-transform duration-150 focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]"
