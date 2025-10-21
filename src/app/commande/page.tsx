@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import DropdownMenu from '@/components/DropdownMenu';
+import CartIndicator from '@/components/CartIndicator';
+import CartTotal from '@/components/CartTotal';
+import CartSummaryButton from '@/components/CartSummaryButton';
 
 export default function CommandePage() {
   type OrderItem = { product: string; quantity: number };
@@ -14,6 +17,17 @@ export default function CommandePage() {
     address: '',
     comments: '',
   });
+
+  // Préremplissage depuis localStorage
+  useEffect(() => {
+    try {
+      const raw = typeof window !== 'undefined' ? window.localStorage.getItem('cartItems') : null;
+      const cart: OrderItem[] = raw ? JSON.parse(raw) : [];
+      if (Array.isArray(cart) && cart.length > 0) {
+        setFormData((prev) => ({ ...prev, items: cart }));
+      }
+    } catch {}
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -70,6 +84,10 @@ export default function CommandePage() {
 
       const { url } = await response.json();
       if (url) {
+        try {
+          // vider le panier dès que stripe prend le relais
+          window.localStorage.removeItem('cartItems');
+        } catch {}
         window.location.href = url;
       }
     } catch (error) {
@@ -84,11 +102,12 @@ export default function CommandePage() {
         <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <Link href="/menu" className="flex items-center">
             <div className="p-1 rounded-full logo-ring">
-              <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-16 w-16 object-cover rounded-full" />
+              <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-12 w-12 sm:h-16 sm:w-16 object-cover rounded-full" />
             </div>
           </Link>
-          <nav className="flex items-center gap-3 sm:gap-4">
+          <nav className="flex flex-wrap items-center justify-end gap-2 sm:gap-4">
             <DropdownMenu />
+            <CartSummaryButton />
           </nav>
         </div>
       </header>
@@ -99,7 +118,7 @@ export default function CommandePage() {
           <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-center gap-y-1 sm:gap-x-2 text-sm sm:text-base">
             <span className="font-semibold text-brand-text">Commande & livraison</span>
             <span className="hidden sm:inline">·</span>
-            <span>À partir de 4 couscous. Prévoir jusqu’à 48h selon disponibilité.</span>
+            <span>À partir de 4 plats. Prévoir jusqu’à 48h selon disponibilité.</span>
             <span className="hidden sm:inline">·</span>
             <a href="tel:0692154474" className="font-bold text-brand-primary underline-offset-2 hover:underline">0692 15 44 74</a>
           </div>

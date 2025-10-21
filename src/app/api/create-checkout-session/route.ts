@@ -27,6 +27,11 @@ export async function POST(req: NextRequest) {
       'couscous_boulettes': { name: 'Couscous Boulettes', price: 1750 },
       'couscous_2_viandes': { name: 'Couscous 2 Viandes', price: 1850 },
       'couscous_vegetarien': { name: 'Couscous Végétarien', price: 1400 },
+      // Les Tajines
+      'tajine_poulet_abricot': { name: 'Tajine Poulet Abricot', price: 1950 },
+      'tajine_poulet_amandes': { name: 'Tajine Poulet Amandes', price: 1950 },
+      'tajine_kefta_pruneaux': { name: 'Tajine Kefta Pruneaux', price: 1850 },
+      'tajine_vegetarien': { name: 'Tajine Végétarien', price: 1750 },
       // La Gazelle (prix à la pièce / au coffret)
       'corne_gazelle_piece': { name: 'Corne de gazelle (pièce)', price: 250 },
       'macrouts_piece': { name: 'Macrouts (pièce)', price: 220 },

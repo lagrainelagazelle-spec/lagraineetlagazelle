@@ -1,6 +1,13 @@
+"use client";
 import Link from 'next/link';
+import { useEffect } from 'react';
 
 export default function ConfirmationPage() {
+  useEffect(() => {
+    try {
+      window.localStorage.removeItem('cartItems');
+    } catch {}
+  }, []);
   return (
     <div className="bg-brand-background text-brand-text min-h-screen">
       <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50">

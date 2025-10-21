@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import DropdownMenu from '@/components/DropdownMenu';
+import QuantityCounter from '@/components/QuantityCounter';
+import CartIndicator from '@/components/CartIndicator';
+import CartTotal from '@/components/CartTotal';
+import CartSummaryButton from '@/components/CartSummaryButton';
+import MenuItemCard from '@/components/MenuItemCard';
 
 export default function MenuPage() {
   const decorativeImages = [
@@ -17,12 +22,12 @@ export default function MenuPage() {
         <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <Link href="/menu" className="flex items-center">
             <div className="p-1 rounded-full logo-ring">
-              <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-16 w-16 object-cover rounded-full" />
+              <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-12 w-12 sm:h-16 sm:w-16 object-cover rounded-full" />
             </div>
           </Link>
-          <nav className="flex items-center gap-3 sm:gap-4">
+          <nav className="flex flex-wrap items-center justify-end gap-2 sm:gap-4">
             <DropdownMenu />
-            <Link href="/commande" className="text-sm font-bold px-4 py-2 rounded-md bg-brand-primary bg-[#1AA39A] text-white hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]">Commander</Link>
+            <CartSummaryButton />
           </nav>
         </div>
       </header>
@@ -85,81 +90,21 @@ export default function MenuPage() {
         <section id="la-graine" className="mb-12 scroll-mt-24">
           <h2 className="text-center text-2xl font-extrabold tracking-widest text-brand-primary mb-6">LES COUSCOUS</h2>
           <div className="space-y-5">
-            <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">COUSCOUS ROYAL</p>
-                <p className="text-sm text-brand-text/70">Base végétarienne + poulet + merguez + boulettes</p>
-              </div>
-              <span className="font-bold text-brand-primary">20,00 €</span>
-            </div>
-            <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">COUSCOUS MERGUEZ</p>
-                <p className="text-sm text-brand-text/70">Base végétarienne + merguez</p>
-              </div>
-              <span className="font-bold text-brand-primary">16,50 €</span>
-            </div>
-            <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">COUSCOUS POULET</p>
-                <p className="text-sm text-brand-text/70">Base végétarienne + poulet</p>
-              </div>
-              <span className="font-bold text-brand-primary">16,50 €</span>
-            </div>
-            <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">COUSCOUS BOULETTES</p>
-                <p className="text-sm text-brand-text/70">Base végétarienne + boulettes</p>
-              </div>
-              <span className="font-bold text-brand-primary">17,50 €</span>
-            </div>
-            <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">COUSCOUS 2 VIANDES</p>
-                <p className="text-sm text-brand-text/70">Base végétarienne + 2 viandes au choix</p>
-              </div>
-              <span className="font-bold text-brand-primary">18,50 €</span>
-            </div>
-            <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">COUSCOUS VÉGÉTARIEN</p>
-                <p className="text-sm text-brand-text/70">Semoule fine, légumes de saison, pois chiches, épices et aromates</p>
-              </div>
-              <span className="font-bold text-brand-primary">14,00 €</span>
-            </div>
+            <MenuItemCard title="COUSCOUS ROYAL" description="Base végétarienne + poulet + merguez + boulettes" priceLabel="20,00 €" productId="couscous_royal" />
+            <MenuItemCard title="COUSCOUS MERGUEZ" description="Base végétarienne + merguez" priceLabel="16,50 €" productId="couscous_merguez" />
+            <MenuItemCard title="COUSCOUS POULET" description="Base végétarienne + poulet" priceLabel="16,50 €" productId="couscous_poulet" />
+            <MenuItemCard title="COUSCOUS BOULETTES" description="Base végétarienne + boulettes" priceLabel="17,50 €" productId="couscous_boulettes" />
+            <MenuItemCard title="COUSCOUS 2 VIANDES" description="Base végétarienne + 2 viandes au choix" priceLabel="18,50 €" productId="couscous_2_viandes" />
+            <MenuItemCard title="COUSCOUS VÉGÉTARIEN" description="Semoule fine, légumes de saison, pois chiches, épices et aromates" priceLabel="14,00 €" productId="couscous_vegetarien" />
           </div>
 
           {/* Tajines */}
           <div id="les-tajines" className="mt-8 space-y-5 scroll-mt-24">
             <h3 className="text-center text-xl font-extrabold tracking-widest text-brand-primary mb-2">LES TAJINES</h3>
-            <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">TAJINE POULET ABRICOT</p>
-                <p className="text-sm text-brand-text/70">Base végétarienne + poulet + abricots confits et oignons confits</p>
-              </div>
-              <span className="font-bold text-brand-primary">19,50 €</span>
-            </div>
-            <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">TAJINE POULET AMANDES</p>
-                <p className="text-sm text-brand-text/70">Base végétarienne + amandes et olives</p>
-              </div>
-              <span className="font-bold text-brand-primary">19,50 €</span>
-            </div>
-            <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">TAJINE KEFTA PRUNEAUX</p>
-                <p className="text-sm text-brand-text/70">Base végétarienne + kefta + pruneaux et raisins confits</p>
-              </div>
-              <span className="font-bold text-brand-primary">18,50 €</span>
-            </div>
-            <div className="flex items-start justify-between gap-1 bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">TAJINE VÉGÉTARIEN</p>
-                <p className="text-sm text-brand-text/70">Légumes de saison, pommes de terre, petits pois, piment doux</p>
-              </div>
-              <span className="font-bold text-brand-primary">17,50 €</span>
-            </div>
+            <MenuItemCard title="TAJINE POULET ABRICOT" description="Base végétarienne + poulet + abricots confits et oignons confits" priceLabel="19,50 €" productId="tajine_poulet_abricot" />
+            <MenuItemCard title="TAJINE POULET AMANDES" description="Base végétarienne + amandes et olives" priceLabel="19,50 €" productId="tajine_poulet_amandes" />
+            <MenuItemCard title="TAJINE KEFTA PRUNEAUX" description="Base végétarienne + kefta + pruneaux et raisins confits" priceLabel="18,50 €" productId="tajine_kefta_pruneaux" />
+            <MenuItemCard title="TAJINE VÉGÉTARIEN" description="Légumes de saison, pommes de terre, petits pois, piment doux" priceLabel="17,50 €" productId="tajine_vegetarien" />
           </div>
 
           <div className="mt-6">
@@ -177,52 +122,19 @@ export default function MenuPage() {
           {/* Sous-section: Mignardises */}
           <div id="mignardises" className="space-y-5 scroll-mt-24">
             <h3 className="text-center text-xl font-extrabold tracking-widest text-brand-primary mb-2">LES MIGNARDISES</h3>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">CORNE DE GAZELLE (la pièce)</p>
-                <p className="text-sm text-brand-text/70">6 pièces: 12,50 € — 12 pièces: 23,90 €</p>
-              </div>
-              <span className="font-bold text-brand-primary">2,50 €</span>
-            </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">MACROUTS (la pièce)</p>
-                <p className="text-sm text-brand-text/70">6 pièces: 11 € — 12 pièces: 19,90 €</p>
-              </div>
-              <span className="font-bold text-brand-primary">2,20 €</span>
-            </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">MONTECAOS CANNELLE (la pièce)</p>
-                <p className="text-sm text-brand-text/70">6 pièces: 10,50 € — 12 pièces: 19,90 €</p>
-              </div>
-              <span className="font-bold text-brand-primary">2,00 €</span>
-            </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <div className="flex-1 min-w-0">
-                <p className="font-extrabold tracking-wide">CAPRILU AL LEMON (la pièce)</p>
-                <p className="text-sm text-brand-text/70">6 pièces: 15,00 € — 12 pièces: 30,50 €</p>
-              </div>
-              <span className="font-bold text-brand-primary">3,00 €</span>
-            </div>
+            <MenuItemCard title="CORNE DE GAZELLE (la pièce)" description="6 pièces: 12,50 € — 12 pièces: 23,90 €" priceLabel="2,50 €" productId="corne_gazelle_piece" />
+            <MenuItemCard title="MACROUTS (la pièce)" description="6 pièces: 11 € — 12 pièces: 19,90 €" priceLabel="2,20 €" productId="macrouts_piece" />
+            <MenuItemCard title="MONTECAOS CANNELLE (la pièce)" description="6 pièces: 10,50 € — 12 pièces: 19,90 €" priceLabel="2,00 €" productId="montecaos_cannelle_piece" />
+            <MenuItemCard title="CAPRILU AL LEMON (la pièce)" description="6 pièces: 15,00 € — 12 pièces: 30,50 €" priceLabel="3,00 €" productId="caprilu_citron_piece" />
           </div>
 
           {/* Sous-section: Coffrets */}
           <div id="coffrets" className="mt-8 space-y-3 scroll-mt-24">
             <h3 className="text-center text-xl font-extrabold tracking-widest text-brand-primary mb-2">LES COFFRETS</h3>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <span className="font-semibold">Mix 6 pièces</span>
-              <span className="font-bold text-brand-primary">12,50 €</span>
-            </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <span className="font-semibold">Mix 12 pièces</span>
-              <span className="font-bold text-brand-primary">24,90 €</span>
-            </div>
-            <div className="flex items-start justify-between bg-white rounded-md border border-gray-200 p-4 shadow-sm">
-              <span className="font-semibold">Mix 18 pièces</span>
-              <span className="font-bold text-brand-primary">37,90 €</span>
-            </div>
-            <p className="text-xs text-brand-text/60 text-center">Quantité supérieure sur demande</p>
+            <MenuItemCard title="Mix 6 pièces" priceLabel="12,50 €" productId="coffret_mix_6" />
+            <MenuItemCard title="Mix 12 pièces" priceLabel="24,90 €" productId="coffret_mix_12" />
+            <MenuItemCard title="Mix 18 pièces" priceLabel="37,90 €" productId="coffret_mix_18" />
+            <p className="text-lg text-brand-text/60 text-center">Quantité supérieure sur demande</p>
             <div className="rounded-md border border-amber-200 bg-white p-4 text-sm">
               <p className="font-semibold text-brand-text">Allergènes</p>
               <p className="mt-1 text-brand-text/80">gluten, fruits à coque et lait.</p>
