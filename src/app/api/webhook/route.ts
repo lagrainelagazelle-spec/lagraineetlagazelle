@@ -53,6 +53,20 @@ export async function POST(req: NextRequest) {
       console.log('Métadonnées de la commande :', metadata);
 
       if (metadata) {
+        // Construire l'adresse lisible à partir des métadonnées (compatibilité avec anciens champs)
+        const addressStr = (() => {
+          const parts = [
+            (metadata.houseNumber as string) || '',
+            (metadata.streetLine1 as string) || (metadata.address as string) || '',
+            (metadata.postcode as string) || '',
+            (metadata.city as string) || '',
+          ].filter(Boolean);
+          return parts.join(' ').trim();
+        })();
+
+        // Lien Google Maps
+        const mapsUrl = addressStr ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressStr)}` : '';
+
         // 1. Ajouter à Google Sheets
         try {
           const itemsJson = metadata.items;
@@ -67,7 +81,7 @@ export async function POST(req: NextRequest) {
                   phone: metadata.phone,
                   product: item.product,
                   quantity: item.quantity,
-                  address: metadata.address,
+                  address: addressStr,
                   comments: metadata.comments,
                 });
               }
@@ -107,7 +121,7 @@ export async function POST(req: NextRequest) {
               <p><strong>Téléphone:</strong> ${metadata.phone}</p>
               <p><strong>Articles:</strong></p>
               <ul>${lines}</ul>
-              <p><strong>Adresse:</strong> ${metadata.address}</p>
+              <p><strong>Adresse:</strong> ${addressStr || '—'}${mapsUrl ? ` — <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer">Voir sur Google Maps</a>` : ''}</p>
               <p><strong>Commentaires:</strong> ${metadata.comments || 'Aucun'}</p>
             `,
           });

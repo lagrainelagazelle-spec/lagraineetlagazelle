@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import DropdownMenu from '@/components/DropdownMenu';
 import CartSummaryButton from '@/components/CartSummaryButton';
@@ -21,6 +21,15 @@ export default function CommandePage() {
     city: '',
     comments: '',
   });
+  const [showToast, setShowToast] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastTimer, setToastTimer] = useState<number | null>(null);
+
+  const totalItems = useMemo(() => (
+    Array.isArray(formData.items)
+      ? formData.items.reduce((s, it) => s + Number(it?.quantity || 0), 0)
+      : 0
+  ), [formData.items]);
 
   // Préremplissage depuis localStorage
   useEffect(() => {
@@ -76,6 +85,17 @@ export default function CommandePage() {
     e.preventDefault();
     
     try {
+      if (totalItems <= 0) {
+        setShowToast(true);
+        setToastVisible(false);
+        requestAnimationFrame(() => setToastVisible(true));
+        const t = window.setTimeout(() => {
+          setToastVisible(false);
+          window.setTimeout(() => setShowToast(false), 300);
+        }, 2500);
+        setToastTimer(t);
+        return;
+      }
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
@@ -101,6 +121,14 @@ export default function CommandePage() {
       // Gérer l'erreur, par exemple afficher un message à l'utilisateur
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (toastTimer) {
+        window.clearTimeout(toastTimer);
+      }
+    };
+  }, [toastTimer]);
 
   return (
     <div className="bg-white text-brand-text min-h-screen">
@@ -205,10 +233,43 @@ export default function CommandePage() {
               >
                 Passer au paiement
               </button>
+              {totalItems <= 0 && (
+                <p className="mt-2 text-center text-xs text-red-600">Votre panier est vide. Ajoutez des articles depuis le menu avant de payer.</p>
+              )}
             </div>
           </form>
         </div>
       </main>
+      {showToast && (
+        <div className="fixed z-[60] px-4 sm:px-0 inset-x-0 top-6 sm:inset-x-auto sm:top-auto sm:bottom-6 sm:right-6 flex justify-center sm:justify-end">
+          <div
+            className={`relative max-w-sm w-full rounded-md shadow-2xl ring-2 ring-white/50 border-2 border-[#1AA39A] bg-[#1AA39A] text-white px-4 py-4 transition-all duration-300 ease-out transform ${toastVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
+            role="status"
+            aria-live="polite"
+          >
+            <button
+              type="button"
+              aria-label="Fermer"
+              onClick={() => { setToastVisible(false); window.setTimeout(() => setShowToast(false), 300); }}
+              className="absolute top-2 right-2 text-white/90 hover:text-white"
+            >
+              ×
+            </button>
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0 mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-6 w-6">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 8v5M12 16h.01" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-base sm:text-lg font-extrabold tracking-wide">Panier vide</p>
+                <p className="mt-1 text-sm sm:text-base font-semibold">Ajoutez des articles avant de continuer au paiement.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <footer className="bg-white">
         <div className="max-w-5xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-brand-text/60">
           <p>&copy; {new Date().getFullYear()} La Graine et La Gazelle. Tous droits réservés.</p>
