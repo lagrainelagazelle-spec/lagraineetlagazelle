@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { productPricesCents, formatEuroFromCents } from '@/lib/pricing';
+import { productPricesCents, formatEuroFromCents, getLineTotalCents } from '@/lib/pricing';
 
 type CartItem = { product: keyof typeof productPricesCents; quantity: number };
 
@@ -20,7 +20,7 @@ export default function CartTotal() {
   useEffect(() => {
     const compute = () => {
       const items = readCart();
-      const sum = items.reduce((acc, it) => acc + (productPricesCents[it.product] || 0) * Number(it.quantity || 0), 0);
+      const sum = items.reduce((acc, it) => acc + getLineTotalCents(it.product, Number(it.quantity || 0)), 0);
       setTotalCents(sum);
     };
     compute();

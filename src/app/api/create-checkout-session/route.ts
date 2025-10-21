@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { getStripeBreakdown } from '@/lib/pricing';
 
 // Initialiser Stripe paresseusement pour éviter les erreurs au build si l'env manque
 function getStripe(): Stripe {
@@ -55,14 +56,28 @@ export async function POST(req: NextRequest) {
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: requestedItems.map((it: { product: string; quantity: number }) => ({
-        price_data: {
-          currency: 'eur',
-          product_data: { name: productDetails[it.product].name },
-          unit_amount: productDetails[it.product].price,
-        },
-        quantity: Number(it.quantity || 1),
-      })),
+      line_items: requestedItems.flatMap((it: { product: string; quantity: number }) => {
+        const breakdown = getStripeBreakdown(it.product as any, Number(it.quantity || 0));
+        if (breakdown.length > 0) {
+          return breakdown.map((b) => ({
+            price_data: {
+              currency: 'eur',
+              product_data: { name: b.name },
+              unit_amount: b.unitAmountCents,
+            },
+            quantity: b.quantity,
+          }));
+        }
+        // Fallback pour produits non concernés par bundles
+        return [{
+          price_data: {
+            currency: 'eur',
+            product_data: { name: productDetails[it.product].name },
+            unit_amount: productDetails[it.product].price,
+          },
+          quantity: Number(it.quantity || 1),
+        }];
+      }),
       mode: 'payment',
       success_url: `${req.nextUrl.origin}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${req.nextUrl.origin}/commande`,

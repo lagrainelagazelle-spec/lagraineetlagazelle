@@ -6,6 +6,7 @@ import CartIndicator from '@/components/CartIndicator';
 import CartTotal from '@/components/CartTotal';
 import CartSummaryButton from '@/components/CartSummaryButton';
 import MenuItemCard from '@/components/MenuItemCard';
+import CheckoutCTA from '@/components/CheckoutCTA';
 
 export default function MenuPage() {
   const decorativeImages = [
@@ -25,7 +26,7 @@ export default function MenuPage() {
               <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-12 w-12 sm:h-16 sm:w-16 object-cover rounded-full" />
             </div>
           </Link>
-          <nav className="flex flex-wrap items-center justify-end gap-2 sm:gap-4">
+          <nav className="flex flex-wrap items-center justify-end gap-2 sm:gap-4 whitespace-nowrap">
             <DropdownMenu />
             <CartSummaryButton />
           </nav>
@@ -38,7 +39,7 @@ export default function MenuPage() {
           <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-center gap-y-1 sm:gap-x-2 text-sm sm:text-base">
             <span className="font-semibold text-brand-text">Commande & livraison</span>
             <span className="hidden sm:inline">·</span>
-            <span>À partir de 4 plats. Prévoir jusqu’à 48h selon disponibilité.</span>
+            <span>Prévoir jusqu’à 48h selon disponibilité.</span>
             <span className="hidden sm:inline">·</span>
             <a href="tel:0692154474" className="font-bold text-brand-primary underline-offset-2 hover:underline">0692 15 44 74</a>
           </div>
@@ -158,12 +159,7 @@ export default function MenuPage() {
 
         {/* CTA de commande */}
         <div className="mt-12 text-center">
-          <Link
-            href="/commande"
-            className="inline-flex items-center justify-center px-8 py-3 rounded-md text-white bg-brand-primary bg-[#1AA39A] hover:bg-brand-primary/90 shadow-md focus:outline-none focus:ring-2 focus:ring-brand-secondary border-2 border-brand-primary border-[#1AA39A]"
-          >
-            Commander maintenant
-          </Link>
+          <CheckoutCTA />
         </div>
       </main>
 
