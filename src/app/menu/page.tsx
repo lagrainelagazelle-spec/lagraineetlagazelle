@@ -1,11 +1,15 @@
+"use client";
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRef, useState } from 'react';
 import DropdownMenu from '@/components/DropdownMenu';
 import QuantityCounter from '@/components/QuantityCounter';
 import CartIndicator from '@/components/CartIndicator';
 import CartTotal from '@/components/CartTotal';
 import CartSummaryButton from '@/components/CartSummaryButton';
 import MenuItemCard from '@/components/MenuItemCard';
+import Carousel from '@/components/Carousel';
 import CheckoutCTA from '@/components/CheckoutCTA';
 
 export default function MenuPage() {
@@ -17,6 +21,13 @@ export default function MenuPage() {
     '/images/gazelle_1.png',
     '/images/gazelle_corne.png',
   ];
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [hoverTimer, setHoverTimer] = useState<number | null>(null);
+  const marqueeRef = useRef<HTMLDivElement | null>(null);
+
+  const openLightbox = (src: string) => setLightboxSrc(src);
+  const closeLightbox = () => setLightboxSrc(null);
+
   return (
     <div className="bg-white text-brand-text min-h-screen">
       <header className="bg-white text-brand-text shadow-sm sticky top-0 z-50">
@@ -54,32 +65,69 @@ export default function MenuPage() {
           {/* Titre déplacé au-dessus du carrousel */}
           <h2 className="text-2xl font-extrabold tracking-widest text-brand-primary">LA GRAINE</h2>
           {/* Bandeau défilant de motifs (graines & gazelles) */}
-          <div className="mt-6 marquee-container py-4 bg-brand-background/60 rounded-md">
-            <div className="marquee-track">
-              {decorativeImages.map((src, idx) => (
-                <div key={`seq1-${idx}`} className="ground-badge">
-                  <Image
-                    src={src}
-                    alt="Décor oriental"
-                    width={220}
-                    height={220}
-                    className="decorative-image h-20 sm:h-24 md:h-28 w-auto select-none pointer-events-none"
-                  />
-                </div>
-              ))}
-              {/* Séquence dupliquée pour boucle fluide */}
-              {decorativeImages.map((src, idx) => (
-                <div key={`seq2-${idx}`} className="ground-badge" aria-hidden="true">
-                  <Image
-                    src={src}
-                    alt=""
-                    width={220}
-                    height={220}
-                    className="decorative-image h-20 sm:h-24 md:h-28 w-auto select-none pointer-events-none"
-                  />
-                </div>
-              ))}
+          <div className="mt-6 bg-brand-background/60 rounded-md p-2 relative">
+            <div ref={marqueeRef} className="marquee-container overflow-x-auto">
+              <div className="marquee-track">
+                {[...decorativeImages, ...decorativeImages, ...decorativeImages, ...decorativeImages].map((src, idx) => (
+                  <div key={`seq-${idx}-${src}`} className="ground-badge">
+                    <button
+                      type="button"
+                      aria-label="Agrandir l'image"
+                      onClick={() => openLightbox(src)}
+                      onMouseEnter={() => {
+                        try {
+                          if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
+                            if (hoverTimer) window.clearTimeout(hoverTimer);
+                            const t = window.setTimeout(() => openLightbox(src), 3000);
+                            setHoverTimer(t);
+                          }
+                        } catch {}
+                      }}
+                      onMouseLeave={() => {
+                        if (hoverTimer) {
+                          window.clearTimeout(hoverTimer);
+                          setHoverTimer(null);
+                        }
+                      }}
+                      className="relative overflow-hidden rounded-md block"
+                    >
+                      <Image
+                        src={src}
+                        alt="Décor oriental"
+                        width={220}
+                        height={220}
+                        className="decorative-image h-20 sm:h-24 md:h-28 w-auto select-none pointer-events-auto transition-transform duration-300 ease-out hover:scale-110"
+                      />
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
+            {/* Flèches de contrôle sans interrompre l'animation */}
+            <button
+              type="button"
+              aria-label="Image précédente"
+              onClick={() => {
+                if (marqueeRef.current) marqueeRef.current.scrollBy({ left: - (marqueeRef.current.clientWidth * 0.8), behavior: 'smooth' });
+              }}
+              className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 items-center justify-center h-9 w-9 rounded-full bg-white/90 border shadow hover:bg-white"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              aria-label="Image suivante"
+              onClick={() => {
+                if (marqueeRef.current) marqueeRef.current.scrollBy({ left: (marqueeRef.current.clientWidth * 0.8), behavior: 'smooth' });
+              }}
+              className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 items-center justify-center h-9 w-9 rounded-full bg-white/90 border shadow hover:bg-white"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
           </div>
           {/* Intro déplacée sous le carrousel */}
           <p className="mt-4 max-w-2xl mx-auto text-brand-text/90">
@@ -162,6 +210,35 @@ export default function MenuPage() {
           <CheckoutCTA />
         </div>
       </main>
+
+      {lightboxSrc && (
+        <div
+          className="fixed inset-0 z-[70] bg-black/70 backdrop-blur-[1px] flex items-center justify-center p-4"
+          onClick={closeLightbox}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="relative max-w-3xl w-full">
+            <button
+              type="button"
+              aria-label="Fermer"
+              className="absolute -top-3 -right-3 h-8 w-8 rounded-full bg-white text-brand-text shadow"
+              onClick={closeLightbox}
+            >
+              ×
+            </button>
+            <div className="overflow-hidden rounded-md shadow-2xl">
+              <Image
+                src={lightboxSrc}
+                alt="Agrandissement"
+                width={1200}
+                height={800}
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       <footer className="bg-white">
         <div className="max-w-5xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-brand-text/60">
