@@ -53,16 +53,6 @@ export default function PanierPage() {
 
   return (
     <div className="bg-white text-brand-text min-h-screen">
-      <header className="bg-white text-brand-text shadow-sm sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <Link href="/menu" className="flex items-center">
-            <div className="p-1 rounded-full logo-ring">
-              <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-12 w-12 sm:h-16 sm:w-16 object-cover rounded-full" />
-            </div>
-          </Link>
-          <nav className="flex items-center gap-2 sm:gap-4" />
-        </div>
-      </header>
 
       <main className="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-extrabold text-brand-primary mb-4">Votre panier</h1>
@@ -119,11 +109,7 @@ export default function PanierPage() {
         )}
       </main>
 
-      <footer className="bg-white">
-        <div className="max-w-5xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-brand-text/60">
-          <p>&copy; {new Date().getFullYear()} La Graine et La Gazelle. Tous droits réservés.</p>
-        </div>
-      </footer>
+      {/* Footer global géré par RootLayout */}
     </div>
   );
 }
