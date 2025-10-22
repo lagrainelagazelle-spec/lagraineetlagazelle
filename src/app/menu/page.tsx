@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import DropdownMenu from '@/components/DropdownMenu';
 import QuantityCounter from '@/components/QuantityCounter';
-import CartIndicator from '@/components/CartIndicator';
-import CartTotal from '@/components/CartTotal';
+// import CartIndicator from '@/components/CartIndicator';
+// import CartTotal from '@/components/CartTotal';
 import CartSummaryButton from '@/components/CartSummaryButton';
 import MenuItemCard from '@/components/MenuItemCard';
-import Carousel from '@/components/Carousel';
+// import Carousel from '@/components/Carousel';
 import CheckoutCTA from '@/components/CheckoutCTA';
 
 export default function MenuPage() {
@@ -24,9 +24,57 @@ export default function MenuPage() {
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const [hoverTimer, setHoverTimer] = useState<number | null>(null);
   const marqueeRef = useRef<HTMLDivElement | null>(null);
+  const firstBadgeRef = useRef<HTMLDivElement | null>(null);
+  const [repeatCount, setRepeatCount] = useState<number>(4);
+  const [paused, setPaused] = useState<boolean>(false);
+  const rafRef = useRef<number | null>(null);
+  const scrollTimeoutRef = useRef<number | null>(null);
 
   const openLightbox = (src: string) => setLightboxSrc(src);
   const closeLightbox = () => setLightboxSrc(null);
+
+  useEffect(() => {
+    // Ajuste repeatCount pour remplir au moins 3 largeurs d'écran
+    const adjust = () => {
+      const container = marqueeRef.current;
+      const first = firstBadgeRef.current;
+      if (!container || !first) return;
+      const containerWidth = container.clientWidth;
+      const itemWidth = first.clientWidth || 220;
+      const itemsPerView = Math.max(1, Math.ceil(containerWidth / itemWidth));
+      // On veut au moins 3x la largeur visible pour éviter les trous
+      const needed = Math.max(3, Math.ceil((itemsPerView * 3) / decorativeImages.length));
+      // Important: forcer un nombre pair pour que la 1ère moitié == 2ème moitié (boucle sans à-coup)
+      const even = needed % 2 === 1 ? needed + 1 : needed;
+      setRepeatCount(Math.max(4, even));
+    };
+    adjust();
+    window.addEventListener('resize', adjust);
+    return () => window.removeEventListener('resize', adjust);
+  }, [decorativeImages.length]);
+
+  // Auto-défilement continu avec recentrage à mi-piste (boucle fluide)
+  useEffect(() => {
+    const el = marqueeRef.current;
+    if (!el) return;
+    const speed = 0.6; // px/frame
+    let raf: number;
+    const tick = () => {
+      if (!el.isConnected) return;
+      if (!paused && !lightboxSrc) {
+        el.scrollLeft += speed;
+        const half = el.scrollWidth / 2;
+        if (el.scrollLeft >= half) el.scrollLeft -= half;
+      }
+      raf = window.requestAnimationFrame(tick);
+      rafRef.current = raf;
+    };
+    raf = window.requestAnimationFrame(tick);
+    rafRef.current = raf;
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [paused, lightboxSrc, repeatCount]);
 
   return (
     <div className="bg-white text-brand-text min-h-screen">
@@ -66,40 +114,64 @@ export default function MenuPage() {
           <h2 className="text-2xl font-extrabold tracking-widest text-brand-primary">LA GRAINE</h2>
           {/* Bandeau défilant de motifs (graines & gazelles) */}
           <div className="mt-6 bg-brand-background/60 rounded-md p-2 relative">
-            <div ref={marqueeRef} className="marquee-container overflow-x-auto">
+            <div
+              ref={marqueeRef}
+              className="marquee-container overflow-x-auto"
+              onScroll={() => {
+                setPaused(true);
+                if (scrollTimeoutRef.current) window.clearTimeout(scrollTimeoutRef.current);
+                scrollTimeoutRef.current = window.setTimeout(() => setPaused(false), 1200);
+              }}
+              onMouseDown={() => setPaused(true)}
+              onMouseUp={() => {
+                if (scrollTimeoutRef.current) window.clearTimeout(scrollTimeoutRef.current);
+                scrollTimeoutRef.current = window.setTimeout(() => setPaused(false), 800);
+              }}
+              onTouchStart={() => setPaused(true)}
+              onTouchEnd={() => {
+                if (scrollTimeoutRef.current) window.clearTimeout(scrollTimeoutRef.current);
+                scrollTimeoutRef.current = window.setTimeout(() => setPaused(false), 800);
+              }}
+            >
               <div className="marquee-track">
-                {[...decorativeImages, ...decorativeImages, ...decorativeImages, ...decorativeImages].map((src, idx) => (
-                  <div key={`seq-${idx}-${src}`} className="ground-badge">
-                    <button
-                      type="button"
-                      aria-label="Agrandir l'image"
-                      onClick={() => openLightbox(src)}
-                      onMouseEnter={() => {
-                        try {
-                          if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
-                            if (hoverTimer) window.clearTimeout(hoverTimer);
-                            const t = window.setTimeout(() => openLightbox(src), 3000);
-                            setHoverTimer(t);
-                          }
-                        } catch {}
-                      }}
-                      onMouseLeave={() => {
-                        if (hoverTimer) {
-                          window.clearTimeout(hoverTimer);
-                          setHoverTimer(null);
-                        }
-                      }}
-                      className="relative overflow-hidden rounded-md block"
+                {Array.from({ length: repeatCount }).flatMap((_, repIdx) => (
+                  decorativeImages.map((src, idx) => (
+                    <div
+                      key={`rep${repIdx}-img${idx}`}
+                      className="ground-badge"
+                      ref={repIdx === 0 && idx === 0 ? firstBadgeRef : undefined}
                     >
-                      <Image
-                        src={src}
-                        alt="Décor oriental"
-                        width={220}
-                        height={220}
-                        className="decorative-image h-20 sm:h-24 md:h-28 w-auto select-none pointer-events-auto transition-transform duration-300 ease-out hover:scale-110"
-                      />
-                    </button>
-                  </div>
+                      <button
+                        type="button"
+                        aria-label="Agrandir l'image"
+                        onClick={() => openLightbox(src)}
+                        onMouseEnter={() => {
+                          try {
+                            if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
+                              if (hoverTimer) window.clearTimeout(hoverTimer);
+                              const t = window.setTimeout(() => openLightbox(src), 3000);
+                              setHoverTimer(t);
+                            }
+                          } catch {}
+                        }}
+                        onMouseLeave={() => {
+                          if (hoverTimer) {
+                            window.clearTimeout(hoverTimer);
+                            setHoverTimer(null);
+                          }
+                        }}
+                        className="relative overflow-hidden rounded-md block"
+                      >
+                        <Image
+                          src={src}
+                          alt="Décor oriental"
+                          width={220}
+                          height={220}
+                          className="decorative-image h-20 sm:h-24 md:h-28 w-auto select-none pointer-events-auto transition-transform duration-300 ease-out hover:scale-110"
+                        />
+                      </button>
+                    </div>
+                  ))
                 ))}
               </div>
             </div>
@@ -229,7 +301,7 @@ export default function MenuPage() {
             </button>
             <div className="overflow-hidden rounded-md shadow-2xl">
               <Image
-                src={lightboxSrc}
+                src={lightboxSrc!}
                 alt="Agrandissement"
                 width={1200}
                 height={800}
