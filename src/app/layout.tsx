@@ -14,19 +14,26 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const APP_URL = "https://lagraineetlagazelle.vercel.app";
+const FB_APP_ID = process.env.NEXT_PUBLIC_FB_APP_ID || ""; // à définir dans Vercel
+
 export const metadata: Metadata = {
   title: "La Graine Et La Gazelle ",
   description: "Service de livraison de repas: Corne de gazelle, Couscous, Lasbanne, Montecaos... Plats et gourmandises kabyles artisanales et authentiques.",
+  metadataBase: new URL(APP_URL),
   openGraph: {
+    type: "website",
+    url: APP_URL,
     images: [
       {
-        url: "https://lagraineetlagazelle.vercel.app/preview.png",
+        url: `${APP_URL}/preview.png`,
         width: 1200,
         height: 630,
         alt: "La Graine et La Gazelle – Aperçu",
       },
     ],
   },
+  other: FB_APP_ID ? { "fb:app_id": FB_APP_ID } : undefined,
 };
 
 export default function RootLayout({
