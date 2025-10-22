@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [
       {
-        url: "https://lagraineetlagazelle.vercel.app/preview.jpg",
+        url: "https://lagraineetlagazelle.vercel.app/preview.png",
         width: 1200,
         height: 630,
         alt: "La Graine et La Gazelle – Aperçu",
