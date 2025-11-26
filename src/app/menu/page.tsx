@@ -233,7 +233,7 @@ export default function MenuPage() {
             <h3 className="text-center text-xl font-extrabold tracking-widest text-brand-primary mb-2">LES MIGNARDISES</h3>
             <MenuItemCard title="CORNE DE GAZELLE (la pièce)" description="6 pièces: 12,50 € — 12 pièces: 23,90 €" priceLabel="2,50 €" productId="corne_gazelle_piece" />
             <MenuItemCard title="MACROUTS (la pièce)" description="6 pièces: 11 € — 12 pièces: 19,90 €" priceLabel="2,20 €" productId="macrouts_piece" />
-            <MenuItemCard title="MONTECAOS CANNELLE (la pièce)" description="6 pièces: 10,50 € — 12 pièces: 19,90 €" priceLabel="0,50 €" productId="montecaos_cannelle_piece" />
+            <MenuItemCard title="MONTECAOS CANNELLE (la pièce)" description="6 pièces: 10,50 € — 12 pièces: 19,90 €" priceLabel="2,00 €" productId="montecaos_cannelle_piece" />
             <MenuItemCard title="CAPRILU AL LEMON (la pièce)" description="6 pièces: 15,00 € — 12 pièces: 30,50 €" priceLabel="3,00 €" productId="caprilu_citron_piece" />
           </div>
 

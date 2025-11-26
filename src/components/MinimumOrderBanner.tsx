@@ -32,7 +32,7 @@ export default function MinimumOrderBanner({ showTotal = true }: { showTotal?: b
     () => items.reduce((s, it) => s + getLineTotalCents(it.product, Number(it.quantity || 0)), 0),
     [items]
   );
-  const minimumCents = 4000;
+  const minimumCents = 5000;
   const missingCents = Math.max(0, minimumCents - totalCents);
 
   return (
@@ -44,7 +44,7 @@ export default function MinimumOrderBanner({ showTotal = true }: { showTotal?: b
         </svg>
       </div>
       <div className="text-sm">
-        <p className="font-extrabold text-brand-primary">Minimum de commande: {formatEuroFromCents(minimumCents)}</p>
+        <p className="font-extrabold text-brand-primary">Minimum de commande en livraison: {formatEuroFromCents(minimumCents)}</p>
         {showTotal ? (
           <p className="mt-0.5 text-brand-text/80">
             Total actuel: <span className="font-semibold">{formatEuroFromCents(totalCents)}</span>
