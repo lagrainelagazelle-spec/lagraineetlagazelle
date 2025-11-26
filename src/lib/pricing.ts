@@ -33,7 +33,7 @@ export const productPricesCents: Record<ProductId, number> = {
   // La Gazelle
   corne_gazelle_piece: 250,
   macrouts_piece: 220,
-  montecaos_cannelle_piece: 200,
+  montecaos_cannelle_piece: 50,
   caprilu_citron_piece: 300,
   coffret_mix_6: 1250,
   coffret_mix_12: 2490,
