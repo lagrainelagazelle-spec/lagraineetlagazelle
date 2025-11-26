@@ -1,0 +1,5 @@
+image pour chaque plat 
+minimum commande voir si posisble en focntion de l'adresse 
+env de prod pour stripe
+baniere sur insta
+readme et expliaction pour github stripe ou encore resend plus mail et workflow

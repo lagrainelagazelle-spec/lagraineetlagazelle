@@ -99,7 +99,7 @@ export async function POST(req: NextRequest) {
         // 2. Envoyer un email de notification
         try {
           const resend = getResend();
-          const sender = process.env.SENDER_EMAIL || 'noreply@votre-domaine.com';
+          const sender = process.env.SENDER_EMAIL || 'onboarding@resend.dev';
           const recipient = process.env.DESTINATION_EMAIL || 'votre-email@gmail.com';
           const lines = (() => {
             try {
@@ -139,3 +139,4 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ received: true }, { status: 200 });
 }
+export const runtime = 'nodejs';
