@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { productPricesCents, productLabels, formatEuroFromCents } from '@/lib/pricing';
 import AddressAutocomplete from '@/components/AddressAutocomplete';
+import MinimumOrderBanner from '@/components/MinimumOrderBanner';
 
 export default function CommandePage() {
   type OrderItem = { product: string; quantity: number };
@@ -148,6 +149,10 @@ export default function CommandePage() {
         <div className="bg-white p-8 rounded-lg shadow-xl">
           <h1 className="text-3xl font-extrabold text-brand-primary mb-2">Informations de livraison</h1>
           <p className="text-brand-text/80 mb-8">Renseignez vos coordonnées pour finaliser la commande.</p>
+
+          <div className="mb-6">
+            <MinimumOrderBanner />
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Le récapitulatif est maintenant sur /panier */}

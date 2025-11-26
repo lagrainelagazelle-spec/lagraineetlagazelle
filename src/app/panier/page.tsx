@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { productPricesCents, productLabels, formatEuroFromCents, getLineTotalCents } from '@/lib/pricing';
 import QuantityCounter from '@/components/QuantityCounter';
+import MinimumOrderBanner from '@/components/MinimumOrderBanner';
 
 type CartItem = { product: keyof typeof productPricesCents; quantity: number };
 
@@ -56,6 +57,10 @@ export default function PanierPage() {
 
       <main className="max-w-4xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-extrabold text-brand-primary mb-4">Votre panier</h1>
+
+        <div className="mb-4">
+          <MinimumOrderBanner />
+        </div>
 
         {items.length === 0 ? (
           <div className="rounded-md border-2 border-dashed border-gray-300 p-8 text-center">

@@ -1,6 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { useEffect } from 'react';
+import MinimumOrderBanner from '@/components/MinimumOrderBanner';
 
 export default function ConfirmationPage() {
   useEffect(() => {
@@ -22,6 +23,9 @@ export default function ConfirmationPage() {
       </header>
 
       <main className="max-w-4xl mx-auto py-20 px-4 sm:px-6 lg:px-8 text-center">
+        <div className="mb-6 text-left">
+          <MinimumOrderBanner showTotal={false} />
+        </div>
         <div className="bg-white p-8 sm:p-12 rounded-lg shadow-xl">
           <svg className="mx-auto h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
