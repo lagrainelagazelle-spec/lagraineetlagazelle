@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
       // La Gazelle (prix à la pièce / au coffret)
       'corne_gazelle_piece': { name: 'Corne de gazelle (pièce)', price: 250 },
       'macrouts_piece': { name: 'Macrouts (pièce)', price: 220 },
-      'montecaos_cannelle_piece': { name: 'Montecaos cannelle (pièce)', price: 200 },
+      'montecaos_cannelle_piece': { name: 'Montecaos cannelle (pièce)', price: 50 },
       'caprilu_citron_piece': { name: 'Caprilu au citron (pièce)', price: 300 },
       'coffret_mix_6': { name: 'Coffret mix 6 pièces', price: 1250 },
       'coffret_mix_12': { name: 'Coffret mix 12 pièces', price: 2490 },
