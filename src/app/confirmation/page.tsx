@@ -11,17 +11,6 @@ export default function ConfirmationPage() {
   }, []);
   return (
     <div className="bg-brand-background text-brand-text min-h-screen">
-      {/* <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <Link href="/menu" className="flex items-center">
-            <img src="/images/logo_lglg.png" alt="La Graine et La Gazelle" className="h-16 w-auto" />
-          </Link>
-          <nav className="flex items-center gap-3 sm:gap-4">
-            {/* Liens sociaux dans le header global via layout.tsx */}
-          </nav>
-        </div>
-      </header> */}
-
       <main className="max-w-4xl mx-auto py-20 px-4 sm:px-6 lg:px-8 text-center">
         <div className="mb-6 text-left">
           <MinimumOrderBanner showTotal={false} />
